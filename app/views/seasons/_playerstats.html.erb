@@ -1,0 +1,36 @@
+<% apps = @playerrecord.leagueapps %>
+<div class="grid_1"><%= h5alternate(idx) %><%= checkforzero(apps) %></h5></div>
+<% subs = @playerrecord.leaguesubs %>
+<div class="grid_1"><%= h5alternate(idx) %>(<%= checkforzero(subs) %>)</h5></div>
+<% goals = @playerrecord.leaguegoals %>
+<div class="grid_1"><%= h5alternate(idx) %><%= checkforzero(goals) %></h5></div>
+<% leaguecupapps = @playerrecord.leaguecupapps %>
+<% apps = apps + leaguecupapps %>
+<div class="grid_1"><h5 class="grey"><%= checkforzero(leaguecupapps) %></h5></div>
+<% leaguecupsubs = @playerrecord.leaguecupsubs %>
+<% subs = subs + leaguecupsubs %>
+<div class="grid_1"><h5 class="grey">(<%= checkforzero(leaguecupsubs) %>)</h5></div>
+<% leaguecupgoals = @playerrecord.leaguecupgoals %>
+<% goals = goals + leaguecupgoals %>
+<div class="grid_1"><h5 class="grey"><%= checkforzero(leaguecupgoals) %></h5></div>
+<% facupapps = @playerrecord.facupapps %>
+<% apps = apps + facupapps %>
+<div class="grid_1"><%= h5alternate(idx) %><%= checkforzero(facupapps) %></h5></div>
+<% facupsubs = @playerrecord.facupsubs %>
+<% subs = subs + facupsubs %>
+<div class="grid_1"><%= h5alternate(idx) %>(<%= checkforzero(facupsubs) %>)</h5></div>
+<% facupgoals = @playerrecord.facupgoals %>
+<% goals = goals + facupgoals %>
+<div class="grid_1"><%= h5alternate(idx) %><%= checkforzero(facupgoals) %></h5></div>
+<% othercupapps = @playerrecord.othercupapps %>
+<% apps = apps + othercupapps %>
+<div class="grid_1"><h5 class="grey"><%= checkforzero(othercupapps) %></h5></div>
+<% othercupsubs = @playerrecord.othercupsubs %>
+<% subs = subs + othercupsubs %>
+<div class="grid_1"><h5 class="grey">(<%= checkforzero(othercupsubs) %>)</h5></div>
+<% othercupgoals = @playerrecord.othercupgoals %>
+<% goals = goals + othercupgoals %>
+<div class="grid_1"><h5 class="grey"><%= checkforzero(othercupgoals) %></h5></div>
+<div class="grid_1"><%= h5alternate(idx) %><%= checkforzero(apps) %></h5></div>
+<div class="grid_1"><%= h5alternate(idx) %>(<%= checkforzero(subs) %>)</h5></div>
+<div class="grid_1"><%= h5alternate(idx) %><%= checkforzero(goals) %></h5></div>

@@ -1,0 +1,47 @@
+<% a = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","XYZ"] %>
+<% a.each do |x|%>
+<div class="grid_1">
+  <h4><%= link_to x,players_path(:key => x) %></h4>
+</div>
+<% end %>
+<div class="grid_24_r_to_g_gradient">
+  <h3>NOTTINGHAM FOREST - PLAYERS <%= @key %></h3>
+</div>
+<div class="grid_9">
+  <h4>Competition ></h4>
+</div>
+<div class="grid_3">
+  <h4>League</h4>
+</div>
+<div class="grid_3">
+  <h4>League Cup</h4>
+</div>
+<div class="grid_3">
+  <h4>FA Cup</h4>
+</div>
+<div class="grid_3">
+  <h4>Other Cup</h4>
+</div>
+<div class="grid_3">
+  <h4>TOTALS</h4>
+</div>
+<div class="grid_6">
+  <h4>Player</h4>
+</div>
+<div class="grid_1">
+  <h4>Pos</h4>
+</div>
+<div class="grid_2">
+  <h4>Years</h4>
+</div>
+<% for x in 0..4  %>
+<div class="grid_1">
+  <h4>App</h4>
+</div>
+<div class="grid_1">
+  <h4>Sub</h4>
+</div>
+<div class="grid_1">
+  <h4>Gls</h4>
+</div>
+<% end %>

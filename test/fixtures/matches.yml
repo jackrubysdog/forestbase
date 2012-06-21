@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  id: 1
+  season_id: 1
+  matchdate: 2012-06-16 18:06:55
+  opponents_id: 1
+  venue_id: 1
+  han: 
+  competition_id: 1
+
+two:
+  id: 1
+  season_id: 1
+  matchdate: 2012-06-16 18:06:55
+  opponents_id: 1
+  venue_id: 1
+  han: 
+  competition_id: 1

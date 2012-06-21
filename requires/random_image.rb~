@@ -1,0 +1,18 @@
+class RandomImage
+  
+  def initialize
+    @images = Array.new
+    @images << {:image => "nf_otd.gif", :url => "http://"}
+    @images << {:image => "nf_m.gif", :url => "http://"}
+    @images << {:image => "nf_bcl.gif", :url => "http://"}
+    @idx = rand(3)
+  end
+  
+  def image
+    @image = @images[@idx][:image]
+  end
+
+  def url
+    @image = @images[@idx][:url]
+  end
+end

@@ -1,0 +1,51 @@
+<%= render 'seasons/index_header' %> 
+  
+<% @seasons.each_with_index do |season, idx| %>
+  <div class="grid_2">
+    <% seasonrecord = SeasonRecord.new(season.id) %>
+    <%= h5alternate(idx) %><%= link_to season.season, season %></h5>
+  </div>
+  <div class="grid_3">
+    <%= h5alternate(idx) %><%= season.division.name %></h5>
+  </div>
+  <div class="grid_1">
+    <%= h5alternate(idx) %><%= tier_roman(season.division.tier) %></h5>
+  </div>
+  <div class="grid_1">
+    <% played = seasonrecord.played %>
+    <% clubs = (played/2)+1 %>
+    <%= h5alternate(idx) %><%= checkforzero(played) %></h5>
+  </div>
+  <div class="grid_1">
+    <% won = seasonrecord.won %>
+    <%= h5alternate(idx) %><%= checkforzero(won) %></h5>
+  </div>
+  <div class="grid_1">
+    <% drawn = seasonrecord.drawn %>
+    <%= h5alternate(idx) %><%= checkforzero(drawn) %></h5>
+  </div>
+  <div class="grid_1">
+    <%= h5alternate(idx) %><%= checkforzero(seasonrecord.lost) %></h5>
+  </div>
+  <div class="grid_1">
+    <%= h5alternate(idx) %><%= checkforzero(seasonrecord.f) %></h5>
+  </div>
+  <div class="grid_1">
+    <%= h5alternate(idx) %><%= checkforzero(seasonrecord.a) %></h5>
+  </div>
+  <div class="grid_1">
+    <%= h5alternate(idx) %><%= checkforzero((won*seasonrecord.points)+drawn) %></h5>
+  </div>
+  <div class="grid_2">
+    <%= h5position(idx, seasonrecord.finalposition, clubs) %><%= checkforzeroslashone(seasonrecord.finalposition,clubs) %></h5>
+  </div>
+  <div class="grid_3">
+    <%= h5round(idx,cuproundverbose(seasonrecord.facupround[0],seasonrecord.facupround[1],seasonrecord.facupround[2])) %><%= cuproundverbose(seasonrecord.facupround[0],seasonrecord.facupround[1],seasonrecord.facupround[2]) %></h5>
+  </div>
+  <div class="grid_3">
+    <%= h5round(idx,cuproundverbose(seasonrecord.leaguecupround[0],seasonrecord.leaguecupround[1],seasonrecord.leaguecupround[2])) %><%= cuproundverbose(seasonrecord.leaguecupround[0],seasonrecord.leaguecupround[1],seasonrecord.leaguecupround[2]) %></h5>
+  </div>
+  <div class="grid_3">
+    <%= h5round(idx,cuproundverbose(seasonrecord.othercupround[0],seasonrecord.othercupround[2],seasonrecord.othercupround[3])) %><%= othercup(seasonrecord.othercupround[1]) %><%= cuproundverbose(seasonrecord.othercupround[0],seasonrecord.othercupround[2],seasonrecord.othercupround[3]) %></h5>
+  </div>
+<% end %>

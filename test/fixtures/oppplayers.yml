@@ -1,0 +1,27 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  id: 1
+  name: 1
+  birthplace: MyText
+  country_id: 1
+  deathdate: 2012-06-18 19:15:38
+  firstnames: MyText
+  knownname: MyText
+  birthdate: 2012-06-18 19:15:38
+  playingcareer: MyText
+  positionfull: MyText
+  shortname: MyText
+
+two:
+  id: 1
+  name: 1
+  birthplace: MyText
+  country_id: 1
+  deathdate: 2012-06-18 19:15:38
+  firstnames: MyText
+  knownname: MyText
+  birthdate: 2012-06-18 19:15:38
+  playingcareer: MyText
+  positionfull: MyText
+  shortname: MyText

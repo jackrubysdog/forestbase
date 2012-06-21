@@ -1,0 +1,29 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  id: 1
+  player_id: 1
+  shirt: 1
+  on: 1
+  subbed: false
+  off: 1
+  subbedby: 1
+  booked: false
+  bookedtime: 1
+  sentoff: false
+  sentofftime: 1
+  match_id: 1
+
+two:
+  id: 1
+  player_id: 1
+  shirt: 1
+  on: 1
+  subbed: false
+  off: 1
+  subbedby: 1
+  booked: false
+  bookedtime: 1
+  sentoff: false
+  sentofftime: 1
+  match_id: 1

@@ -1,0 +1,15 @@
+<%= render 'players/index_header' %>
+
+<% @players.each_with_index do |x, idx| %>
+  <% @playerrecord = PlayerRecord.new(x.id) %>
+  <div class="grid_6">
+    <%= h5alternate_left(idx) %><%= link_to x.name, x %></h5>
+  </div>
+  <div class="grid_1">
+    <%= h5alternate(idx) %><%= x.position %></h5>
+  </div>
+  <div class="grid_2">
+    <%= h5alternate(idx) %><%= constructyears(x.id,@playerrecord.firstgame.year,@playerrecord.lastgame.year) %></h5>
+  </div>
+  <%= render 'seasons/playerstats', :idx => idx %>
+<% end %>

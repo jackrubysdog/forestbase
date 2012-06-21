@@ -1,0 +1,38 @@
+<div class="grid_24_r_to_g_gradient">
+  <h3>Player Profile - <%= @player.knownname %></h3>
+</div>
+<div class="grid_8 prefix_6">
+  <h6 class="left"><%= @player.firstnames + " " + @player.shortname.upcase %></br>
+    Birthdate: <%= @player.birthdate.strftime("%B %d, %Y") %></br>
+  <% unless @player.deathdate.nil? %>
+    <%= "Date of Death: " + checkdeath(@player.deathdate) %></br>
+  <% end %>
+  Birthplace: <%= @player.birthplace %><br>
+  Career: <%= @player.playingcareer %><br>
+  <% unless @player.managerialcareer.nil? %>
+    <%=  "Managerial Career: " + @player.managerialcareer %></br>
+  <% end %>
+  <% unless @player.signedfrom.nil? %>
+  Signed from: <%= @player.signedfrom %> (£<%= @player.signedfee.to_s.reverse.gsub(/...(?=.)/,'\&,').reverse %>),&nbsp;
+  <%= @player.datesigned.strftime("%b %Y") %></br>
+  <% end %>
+  <% unless @player.soldto.nil? %>
+  Sold to: <%= @player.soldto %> (£<%= @player.soldfee.to_s.reverse.gsub(/...(?=.)/,'\&,').reverse %>),&nbsp;
+  <%= @player.datesold.strftime("%b %Y") %></br>
+  <% end %>
+  <% unless @player.signedfromsecondspell.nil? %>
+  Signed from (2nd spell): <%= @player.signedfromsecondspell %> (£<%= @player.signedfeesecondspell.to_s.reverse.gsub(/...(?=.)/,'\&,').reverse %>),&nbsp;
+  <%= @player.datesignedsecondspell.strftime("%b %Y") %></br>
+  <% end %>
+  <% unless @player.soldtosecondspell.nil? %>
+  Sold to (2nd spell): <%= @player.soldtosecondspell %> (£<%= @player.soldfeesecondspell.to_s.reverse.gsub(/...(?=.)/,'\&,').reverse %>),&nbsp;
+  <%= @player.datesoldsecondspell.strftime("%b %Y") %></br>
+  <% end %>
+  <% unless @player.loanedfrom.nil? %>
+  Loaned from: <%= @player.loanedfrom %>,&nbsp;
+  <%= @player.loandatesigned.strftime("%b %Y") %></br>
+  <% end %>
+  </h6>
+</div>
+<div class="grid_24"><h2>Pen Picture</h2></div>
+<div class="grid_24"><h6 class="left"><%= raw @player.penpicture %></h6></div>     

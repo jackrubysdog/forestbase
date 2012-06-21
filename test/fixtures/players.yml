@@ -1,0 +1,63 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  id: 1
+  name: MyText
+  shortname: MyText
+  birthplace: MyText
+  birthdate: 2012-06-18 16:09:42
+  position: MyText
+  knownname: MyText
+  firstname: MyText
+  deathdate: 2012-06-18 16:09:42
+  country_id: 1
+  positionfull: MyText
+  number: 1
+  loandatesigned: 2012-06-18 16:09:42
+  loanedfrom: MyText
+  datesigned: 2012-06-18 16:09:42
+  signedfrom: MyText
+  signedfee: 
+  datesold: 2012-06-18 16:09:42
+  soldto: MyText
+  soldfee: 
+  datesignedsecondspell: 2012-06-18 16:09:42
+  signedfromsecondspell: MyText
+  signedfeesecondspell: 
+  datesoldsecondspell: 2012-06-18 16:09:42
+  soldtosecondspell: MyText
+  soldfeesecondspell: 
+  playingcareer: MyText
+  managerialcareer: MyText
+  penpicture: MyText
+
+two:
+  id: 1
+  name: MyText
+  shortname: MyText
+  birthplace: MyText
+  birthdate: 2012-06-18 16:09:42
+  position: MyText
+  knownname: MyText
+  firstname: MyText
+  deathdate: 2012-06-18 16:09:42
+  country_id: 1
+  positionfull: MyText
+  number: 1
+  loandatesigned: 2012-06-18 16:09:42
+  loanedfrom: MyText
+  datesigned: 2012-06-18 16:09:42
+  signedfrom: MyText
+  signedfee: 
+  datesold: 2012-06-18 16:09:42
+  soldto: MyText
+  soldfee: 
+  datesignedsecondspell: 2012-06-18 16:09:42
+  signedfromsecondspell: MyText
+  signedfeesecondspell: 
+  datesoldsecondspell: 2012-06-18 16:09:42
+  soldtosecondspell: MyText
+  soldfeesecondspell: 
+  playingcareer: MyText
+  managerialcareer: MyText
+  penpicture: MyText

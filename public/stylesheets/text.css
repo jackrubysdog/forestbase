@@ -1,0 +1,192 @@
+/*
+  960 Grid System ~ Text CSS.
+  Learn more ~ http://960.gs/
+
+  Licensed under GPL and MIT.
+*/
+
+/* `Basic HTML
+----------------------------------------------------------------------------------------------------*/
+
+body {
+  font-family: Trebuchet MS, Lucida Grande, Verdana;
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover{
+  color: #a80329;
+}
+
+div.forestbase_logo{
+  float: left;
+}
+
+div.forestbase_ad{
+  float: right;
+  padding-top: 10px;
+  padding-right: 10px;
+}
+
+pre,
+code {
+  font-family: 'DejaVu Sans Mono', Menlo, Consolas, monospace;
+}
+
+hr {
+  border: 0 #ccc solid;
+  border-top-width: 1px;
+  clear: both;
+  height: 0;
+}
+
+strong {
+  font-weight: bolder;
+}
+
+/* `Headings
+----------------------------------------------------------------------------------------------------*/
+
+h1 {
+  font-size: 25px;
+}
+
+h2 {
+  font-size: 125%;
+  color: #666666;
+  text-align: left;
+  border-bottom: thin solid grey;
+}
+
+
+h3 {
+  font-size: 150%;
+  padding-top: 2px;
+  color: white;
+  font-weight: bold;
+}
+
+h4 {
+  font-size: 80%;
+  color: white;
+  font-weight: bold;
+  background-color: grey;
+}
+
+h5 {
+  font-size: 80%;
+  color: black;
+  background: #EEEEEE;
+  font-weight: normal;
+  text-align: left;
+  padding-left: 2px;
+}
+
+h5.center {
+  text-align: center;
+}
+
+h5.cup {
+  text-align: center;
+  background: #FFCCCC;
+}
+
+h5.cup_left {
+  text-align: left;
+  background: #FFCCCC;
+}
+
+h5.right {
+  text-align: right;
+  padding-right: 2px;
+}
+
+h5.alternate {
+  background: #DDDDDD;
+}
+
+h5.alternate_center {
+  background: #DDDDDD;
+  text-align: center;
+}
+
+h5.alternate_right {
+  text-align: right;
+  background: #DDDDDD;
+  padding-right: 2px;
+}
+
+h5.gold {
+  text-align: center;
+  background: gold;
+}
+
+h5.grey {
+  text-align: center;
+  background: #CCCCCC;
+}
+
+h5.silver {
+  text-align: center;
+  background: silver;
+}
+
+h5.bronze {
+  text-align: center;
+  color: white;
+  background: brown;
+}
+
+h5.relegated {
+  text-align: center;
+  color: white;
+  background: red;
+}
+
+h6 {
+  font-size: 75%;
+  color: #666666;
+}
+
+h6.left {
+  text-align: left;  
+}
+
+
+/* `Spacing
+----------------------------------------------------------------------------------------------------*/
+
+ol {
+  list-style: decimal;
+}
+
+ul {
+  list-style: disc;
+}
+
+li {
+  margin-left: 30px;
+}
+
+p,
+dl,
+hr,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ol,
+ul,
+pre,
+table,
+address,
+fieldset,
+figure {
+  margin-bottom: 3px;
+}

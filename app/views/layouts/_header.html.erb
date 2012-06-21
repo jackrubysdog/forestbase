@@ -1,0 +1,16 @@
+<div class="container_24">
+<div class="forestbase_logo">
+  <%= image_tag("logos/logo.png", :alt => "forestBASE") %>
+</div>
+<div class="forestbase_ad">
+  <% random_ad = RandomImage.new %>
+  <%= link_to image_tag(random_ad.image, :alt => "Ad"), random_ad.url %>
+</div>
+<div class="cssmenu">
+<ul>
+  <% @menus = Menu.find(:all) %>
+  <% @menus.each do |menuitem| %>
+    <%= active_check(menuitem.item) %><%=  link_to menuitem.item, eval(menuitem.link) %></li>
+  <% end %>
+</ul>
+</div>

@@ -1,0 +1,45 @@
+<%= render 'seasons/show_header' %>
+
+<% @matches.each_with_index do |matches, idx| %>
+  <div class="grid_1">
+    <%= h5cupcheck(idx,matches.competition_id, false) %><%= idx + 1 %></h5>
+  </div>
+  <div class="grid_2">
+    <%= h5cupcheck(idx,matches.competition_id, false) %><%= matches.matchdate.strftime("%a %d %b") %></h5>
+  </div>
+  <div class="grid_5">
+    <%= h5cupcheck(idx,matches.competition_id, true) %><%= constructopponent(homevenue(matches.opponent.shortname,matches.han),matches.competition.abbrev,matches.round,matches.leg,matches.replay) %></h5>
+  </div>
+  <div class="grid_1">
+    <%= h5cupcheck(idx,matches.competition_id, false) %><%= wld(matches.for,matches.against) %></h5>
+  </div>
+  <div class="grid_1">
+    <%= h5cupcheck(idx,matches.competition_id, false) %><%= matches.for %>-<%= matches.against %></h5>
+  </div>
+  <div class="grid_1">
+    <%= h5cupcheck(idx,matches.competition_id, false) %><%= checkforzero(matches.points) %></h5>
+  </div>
+  <div class="grid_1">
+    <%= h5cupcheck(idx,matches.competition_id, false) %><%= checkforzero(matches.position) %></h5>
+  </div>
+  <div class="grid_10">
+    <%= h5cupcheck(idx,matches.competition_id, true) %><%= constructgoalscorersstring(matches.id) %></h5>
+  </div>
+  <div class="grid_2">
+    <%= h5cupcheck(idx,matches.competition_id, false) %><%= checkforempty(matches.attendance.to_s.reverse.gsub(/...(?=.)/,'\&,').reverse) %></h5>
+  </div>
+<% end %>
+
+<%= render 'seasons/playerstats_header' %>
+
+<% @temp.each_with_index do |x, idx| %>
+    <% @playerrecord = PlayerSeasonRecord.new(params[:id],x) %>
+    <div class="grid_6"><%= h5alternate_left(idx) %><%= x %></h5></div>
+    <% apps = @playerrecord.leagueapps %>
+
+    <%= render 'seasons/playerstats', :idx => idx %>
+
+    <div class="grid_1"><h5 class="grey"><%= checkforzero(@playerrecord.careerapps) %></h5></div>
+    <div class="grid_1"><h5 class="grey">(<%= checkforzero(@playerrecord.careersubs) %>)</h5></div>
+    <div class="grid_1"><h5 class="grey"><%= checkforzero(@playerrecord.careergoals) %></h5></div>
+<% end %>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>ForestBASE | <%= @title %></title>
+  <%= csrf_meta_tag %>
+  <%= render 'layouts/stylesheets' %>  
+</head>
+
+<body>
+  <%= render 'layouts/header' %>  
+    
+  <%= yield %>
+
+  <%= render 'layouts/footer' %> 
+</body>
+</html>
