@@ -1,14 +1,28 @@
-<div class="grid_24_r_to_g_gradient">
-  <h3>Player Profile - <%= @player.knownname %></h3>
+<div style="position: absolute; width: 100px; left: 141px; top: 300px; font-family: Lucida Sans; font-size: 75px; font-style: bold;
+     color: white; text-align: center;"><%= @player.number %></div>   
+
+<div style="position: absolute; width: 140px; left: 118px; top: 286px; font-family: Lucida Sans; font-size: 12px; font-style: extra-bold;
+     color: white; text-align: center;"><%= @player.shortname.upcase %></div>   
+
+<div class="grid_24">
+  <h2><%= @player.knownname %></h2>
 </div>
-<div class="grid_8 prefix_6">
-  <h6 class="left"><%= @player.firstnames + " " + @player.shortname.upcase %></br>
-    Birthdate: <%= @player.birthdate.strftime("%B %d, %Y") %></br>
+<div class="grid_24">  
+  <div class="grid_6 alpha">
+  </br>
+  <% if @player.position == "GOL" %>
+  <%= image_tag("goal.gif", :alt => "shirt") %></div>
+  <% else %>
+  <%= image_tag("shirt.gif", :alt => "shirt") %></div>
+  <% end %>
+  <div class="grid_6">
+  <h6 class="left"></br>Full Name: <%= @player.firstnames + " " + @player.shortname %></br>
+  Birthdate: <%= @player.birthdate.strftime("%B %d, %Y") %></br>
   <% unless @player.deathdate.nil? %>
     <%= "Date of Death: " + checkdeath(@player.deathdate) %></br>
   <% end %>
-  Birthplace: <%= @player.birthplace %><br>
-  Career: <%= @player.playingcareer %><br>
+  Birthplace: <%= @player.birthplace %></br>
+  Career: <%= @player.playingcareer %></br>
   <% unless @player.managerialcareer.nil? %>
     <%=  "Managerial Career: " + @player.managerialcareer %></br>
   <% end %>
@@ -32,7 +46,41 @@
   Loaned from: <%= @player.loanedfrom %>,&nbsp;
   <%= @player.loandatesigned.strftime("%b %Y") %></br>
   <% end %>
-  </h6>
+  <% player = PlayerRecord.new(@player.id) %>
+  <h6 class="left"></br>
+  Forest debut: <%= player.firstgame.strftime("%b %d, %Y") %> v <%= constructopponentfromdate(player.firstgame) %>&nbsp;<%= getvenuefromdate(player.firstgame) %></br>
+  <% unless @player.active == true %>
+  Final game: <%= player.lastgame.strftime("%b %d, %Y") %> v <%= constructopponentfromdate(player.lastgame) %>&nbsp;<%= getvenuefromdate(player.lastgame) %></br>
+  <% end %>
+  </div>
+  <div class="grid_12 omega"><h2>Forest Career</h2>
+     <div class="grid_2 alpha"><h4>Comp ></h4></div>
+     <div class="grid_2"><h4>League</h4></div>
+     <div class="grid_2"><h4>Lge Cup</h4></div>
+     <div class="grid_2"><h4>FA Cup</h4></div>
+     <div class="grid_2"><h4>Other</h4></div>
+     <div class="grid_2 omega"><h4>TOTAL</h4></div>
+     <div class="grid_2 alpha"><h4>Season</h4></div>
+     <% for x in 0..3 %>
+     <div class="grid_2"><h4>Apps/Gls</h4></div>
+     <% end %>
+     <div class="grid_2 omega"><h4>App/Gls</h4></div>
+  <% @seasons.each_with_index do |x,idx| %>
+     <div class="grid_2 alpha"><%= h5alternate(idx) %><%= x.season %></h5></div>
+     <% season = PlayerSeasonRecord.new(x.season_id,@player.name) %>
+     <div class="grid_2"><%= h5alternate(idx) %><%= season.leagueapps %><% unless season.leaguesubs == 0 %>+<%= season.leaguesubs %><% end %>/<%= season.leaguegoals %></h5></div>
+     <div class="grid_2"><%= h5alternate(idx) %><%= season.leaguecupapps %><% unless season.leaguecupsubs == 0 %>+<%= season.leaguecupsubs %><% end %>/<%= season.leaguecupgoals %></h5></div>
+     <div class="grid_2"><%= h5alternate(idx) %><%= season.facupapps %><% unless season.facupsubs == 0 %>+<%= season.facupsubs %><% end %>/<%= season.facupgoals %></h5></div>     
+     <div class="grid_2"><%= h5alternate(idx) %><%= season.othercupapps %><% unless season.othercupsubs == 0 %>+<%= season.othercupsubs %><% end %>/<%= season.othercupgoals %></h5></div>     
+     <div class="grid_2 omega"><%= h5alternate(idx) %><%= season.totalapps %><% unless season.totalsubs == 0 %>+<%= season.totalsubs %><% end %>/<%= season.totalgoals %></h5></div>     
+  <% end %>
+     <div class="grid_2 alpha"><h4>TOTALS</h4></div>
+     <div class="grid_2"><h4><%= player.leagueapps %><% unless player.leaguesubs == 0 %>+<%= player.leaguesubs %><% end %>/<%= player.leaguegoals %></h4></div>
+     <div class="grid_2"><h4><%= player.leaguecupapps %><% unless player.leaguecupsubs == 0 %>+<%= player.leaguecupsubs %><% end %>/<%= player.leaguecupgoals %></h4></div>
+     <div class="grid_2"><h4><%= player.facupapps %><% unless player.facupsubs == 0 %>+<%= player.facupsubs %><% end %>/<%= player.othercupgoals %></h4></div>
+     <div class="grid_2"><h4><%= player.othercupapps %><% unless player.othercupsubs == 0 %>+<%= player.othercupsubs %><% end %>/<%= player.othercupgoals %></h4></div>
+     <div class="grid_2 omega"><h4><%= player.careerapps %><% unless player.careersubs == 0 %>+<%= player.careersubs %><% end %>/<%= player.careergoals %></h4></div>
+  </div>
 </div>
-<div class="grid_24"><h2>Pen Picture</h2></div>
-<div class="grid_24"><h6 class="left"><%= raw @player.penpicture %></h6></div>     
+<div class="grid_24"></br><h2>Pen Picture</h2></div>
+<div class="grid_24"><h6 class="left"><%= raw @player.penpicture %></h6></div>

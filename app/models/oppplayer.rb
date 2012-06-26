@@ -16,6 +16,9 @@
 class Oppplayer < ActiveRecord::Base
 
   belongs_to  :country
-  has_many    :owngoals
+  has_many    :oppowngoals
+  has_many    :oppgoals
+  has_many    :oppappearances
+  has_many    :oppsubstitutes
   
 end

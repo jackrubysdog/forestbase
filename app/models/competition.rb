@@ -4,6 +4,7 @@
 
 # id           : integer
 # abbrev       : string(255)
+# abbrev2      : string(255)
 # name         : string(255)
 # boolean      : domestic
 # boolean      : european

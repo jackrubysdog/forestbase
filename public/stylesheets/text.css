@@ -52,7 +52,10 @@ strong {
 ----------------------------------------------------------------------------------------------------*/
 
 h1 {
-  font-size: 25px;
+  font-size: 150%;
+  color: white;
+  text-align: center;
+  background: #666666;
 }
 
 h2 {
@@ -61,7 +64,6 @@ h2 {
   text-align: left;
   border-bottom: thin solid grey;
 }
-
 
 h3 {
   font-size: 150%;
@@ -152,8 +154,16 @@ h6 {
   color: #666666;
 }
 
+h6 a {
+  color: #666666;
+}
+
 h6.left {
   text-align: left;  
+}
+
+h6.right {
+  text-align: right;  
 }
 
 

@@ -16,5 +16,6 @@
 class Opponent < ActiveRecord::Base
   
   has_many :matches
+  belongs_to :city
   
 end

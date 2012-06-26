@@ -1,0 +1,266 @@
+<div class="grid_8">
+  
+  <% if @match.han == "H" %>
+    <% hometeam = "Nottingham Forest" %>
+    <% awayteam = @match.opponent.name %>
+    <% home_for = @match.for %>
+    <% away_for = @match.against %>
+    <% home_ht_for = @match.ht_for %>
+    <% away_ht_for = @match.ht_against %>
+    <% home_gss = constructgoalscorersstring(@match.id) %>
+    <% away_gss = constructoppgoalscorersstring(@match.id) %>
+  <% else %>
+    <% awayteam = "Nottingham Forest" %>
+    <% hometeam = @match.opponent.name %>
+    <% away_for = @match.for %>
+    <% home_for = @match.against %>
+    <% away_ht_for = @match.ht_for %>
+    <% home_ht_for = @match.ht_against %>
+    <% away_gss = constructgoalscorersstring(@match.id) %>
+    <% home_gss = constructoppgoalscorersstring(@match.id) %>
+  <% end %>
+  
+  <div class="grid_7 alpha">
+    <h2><%= hometeam %></h2>
+  </div>
+  
+  <div class="grid_1 omega">
+    <h1><%= home_for %></h1>
+  </div>
+  
+  <h6 class="left"><%= raw home_gss %></h6>
+  <hr>
+  
+  <div class="grid_7 alpha">
+    <h2><%= awayteam %></h2>
+  </div>
+  
+  <div class="grid_1 omega">
+    <h1><%= away_for %></h1>
+  </div>
+  
+  <h6 class="left"><%= raw away_gss %></h6>
+  <hr>
+  
+  <div class="grid_8 alpha">
+    <h6 class="left">
+  
+    <% if @match.competition.id == 1 %>
+      <%= @match.season.division.name %>,    
+    <% else %>
+      <%= @match.competition.name + " " + cuproundverbose(@match.round,999,0) %>,
+    <% end %>
+    
+    <%= @match.matchdate.strftime("%B %d, %Y") %>.</h6>
+  </div>
+  
+  <div class="grid_8 alpha">
+    <h6 class="left">Venue: <%= @match.venue.name + ", " + @match.city.name + ", " + @match.country.name %>.</h6>
+  </div>
+  
+  <div class="grid_8 alpha">
+    <h6 class="left">
+    Attendance: <%= @match.attendance.to_s.reverse.gsub(/...(?=.)/,'\&,').reverse + ". Half-time: " + home_ht_for.to_s + "-" + away_ht_for.to_s + "." %>
+  
+  <% if @match.extratime == true %>
+    AET.
+  <% end %>
+  
+  </h6></div> 
+  
+  <% if @match.penalties == true %>
+    <div class="grid_8 alpha">
+    <h6 class="left">
+    <% if @match.penaltiesfor > @match.penaltiesagainst %>
+    Forest won 
+    <% else %>
+    Forest lost 
+    <% end %>
+    <%= @match.penaltiesfor.to_s + "-" + @match.penaltiesagainst.to_s %> on penalties.
+  </div>  
+  <% end %>
+  
+  <% unless @match.referee.nil? %>
+  <div class="grid_8 alpha">
+    <h6 class="left">
+    Referee: <%= @match.referee.name + " (" + @match.referee.residence + ")." %></h6>
+  </div>
+  <% end %>
+
+  <% if @match.competition.id == 1 %>
+  <div class="grid_8 alpha">
+    <h6 class="left">
+    Forest's position: <%= ordinalize(@match.position) %>. Opposition's position: <%= ordinalize(@match.oppposition) %>. 
+    </h6>
+  </div>
+  <% end %>
+  <hr>
+  <div class="grid_8 alpha">
+    <h6 class="right">< <%= link_to "Previous Game", match_path(@match.id-1) %> | 
+    <% if checkforlastgame(@match.id) == true %>
+      Next Game >
+      <% else %>
+      <%= link_to "Next Game", match_path(@match.id+1) %> ></h6>
+    <% end %>
+    <hr>
+  </div>
+
+</div>
+
+
+<div class="grid_8">
+  <h4>NOTTINGHAM FOREST</h4>
+  <div class="grid_1 alpha"><h4>No</h4></div>
+  <div class="grid_5"><h4>Player</h4></div>
+  <div class="grid_1"><h4>On</h4></div>
+  <div class="grid_1 omega"><h4>Off</h4></div>
+  <% team = Appearance.find_all_by_match_id(params[:id],:order => :shirt) %>
+    <% team.each_with_index do |x,idx| %>
+    <div class="grid_1 alpha"><%= h5alternate(idx) %><%= getsquadnumber(x.shirt,x.player.id,@match.season.id) %></h5></div>
+    <div class="grid_5"><%= h5alternate_left(idx) %><%= link_to x.player.knownname, player_path(x.player.id) %>
+    
+    <% if x.booked == true %>
+      &nbsp;<%= image_tag("y.gif",{:style=>"vertical-align: -1px;"}) %> <%= x.bookedtime %>
+    <% end %>
+  
+    <% if x.sentoff == true %>
+      &nbsp;<%= image_tag("r.gif",{:style=>"vertical-align: -1px;"}) %>
+    <% end %>
+    </h5></div>
+    
+    <div class="grid_1"><%= h5alternate(idx) %>1</h5></div>
+    
+    <div class="grid_1 omega"><%= h5alternate(idx) %>
+    <% if x.sentoff == true %>
+      <%= x.sentofftime %>
+    <% else %>
+      <% unless x.subbedby == 0 %>
+      <%= image_tag("d.gif",{:style=>"vertical-align: -1px;"}) %>
+      <% end %>
+      <% unless x.subbedby != 0 and x.off == 90 %>
+       <%= x.off %>
+      <% end %>
+    <% end %>
+    </h5></div> 
+  <% end %>  
+  
+<% subs = Substitute.find_all_by_match_id(params[:id],:order => :shirt) %>
+  <% unless subs.empty? %>
+    <h6 class="left">SUBSTITUTE(S)</h6><hr>
+    <div class="grid_1 alpha"><h4>No</h4></div>
+    <div class="grid_5"><h4>Player</h4></div>
+    <div class="grid_1"><h4>On</h4></div>
+    <div class="grid_1 omega"><h4>Off</h4></div>
+    <% subs.each_with_index do |x,idx| %>
+    <div class="grid_1 alpha"><%= h5alternate(idx) %><%= getsquadnumber(x.shirt,x.player.id,@match.season.id) %></h5></div>
+    <div class="grid_5"><%= h5alternate_left(idx) %><%= link_to x.player.knownname, player_path(x.player.id) %>
+    
+    <% if x.booked == true %>
+      &nbsp;<%= image_tag("y.gif",{:style=>"vertical-align: -1px;"}) %> <%= x.bookedtime %>
+    <% end %>
+
+  <% if x.sentoff == true %>
+      &nbsp;<%= image_tag("r.gif",{:style=>"vertical-align: -1px;"}) %>
+    <% end %>
+    </h5></div>
+    
+    <div class="grid_1"><%= h5alternate(idx) %>
+      <%= image_tag("u.gif",{:style=>"vertical-align: -1px;"}) %>
+      <% unless x.on == 0 %><%= x.on %><% end %>
+    </h5></div>
+    
+    <div class="grid_1 omega"><%= h5alternate(idx) %>
+    <% if x.sentoff == true %>
+      <%= x.sentofftime %>
+    <% else %>
+      <% unless x.subbedby == 0 %>
+      <%= image_tag("d.gif",{:style=>"vertical-align: -1px;"}) %>
+      <% end %>
+      <%= x.off %>
+    <% end %>
+    </h5></div>
+  <% end %> 
+ 
+<% end %>
+</div>
+
+<div class="grid_8">
+  <h4><%= @match.opponent.name.upcase %></h4>
+  <div class="grid_1 alpha"><h4>No</h4></div>
+  <div class="grid_5"><h4>Player</h4></div>
+  <div class="grid_1"><h4>On</h4></div>
+  <div class="grid_1 omega"><h4>Off</h4></div>
+  <% team = Oppappearance.find_all_by_match_id(params[:id],:order => :shirt) %>
+    <% if team.empty? %>
+      <div class="grid_8 alpha"><h5 class="center">No opposition line-up details for this match<h5></div>
+    <%  end %>
+    <% team.each_with_index do |x,idx| %>
+    <div class="grid_1 alpha"><%= h5alternate(idx) %><%= x.shirt %></h5></div>
+    <div class="grid_5"><%= h5alternate_left(idx) %><%= link_to x.oppplayer.knownname, oppplayer_path(x.oppplayer.id)  %>
+    
+    <% if x.booked == true %>
+      &nbsp;<%= image_tag("y.gif",{:style=>"vertical-align: -1px;"}) %> <%= x.bookedtime %>
+    <% end %>
+  
+    <% if x.sentoff == true %>
+      &nbsp;<%= image_tag("r.gif",{:style=>"vertical-align: -1px;"}) %>
+    <% end %>
+    </h5></div>
+    
+    <div class="grid_1"><%= h5alternate(idx) %>1</h5></div>
+    
+    <div class="grid_1 omega"><%= h5alternate(idx) %>
+    <% if x.sentoff == true %>
+      <%= x.sentofftime %>
+    <% else %>
+      <% unless x.subbedby == 0 %>
+      <%= image_tag("d.gif",{:style=>"vertical-align: -1px;"}) %>
+      <% end %>
+      <% unless x.subbedby != 0 and x.off == 90 %>
+       <%= x.off %>
+      <% end %>
+    <% end %>
+    </h5></div>
+    
+  <% end %>  
+
+<% subs = Oppsubstitute.find_all_by_match_id(params[:id],:order => :shirt) %>
+  <% unless subs.empty? %>
+    <h6 class="left">SUBSTITUTE(S)</h6><hr>
+    <div class="grid_1 alpha"><h4>No</h4></div>
+    <div class="grid_5"><h4>Player</h4></div>
+    <div class="grid_1"><h4>On</h4></div>
+    <div class="grid_1 omega"><h4>Off</h4></div>
+    <% subs.each_with_index do |x,idx| %>
+    <div class="grid_1 alpha"><%= h5alternate(idx) %><%= x.shirt %></h5></div>
+    <div class="grid_5"><%= h5alternate_left(idx) %><%= link_to x.oppplayer.knownname, oppplayer_path(x.oppplayer.id) %>
+    
+    <% if x.booked == true %>
+      &nbsp;<%= image_tag("y.gif",{:style=>"vertical-align: -1px;"}) %> <%= x.bookedtime %>
+    <% end %>
+
+  <% if x.sentoff == true %>
+      &nbsp;<%= image_tag("r.gif",{:style=>"vertical-align: -1px;"}) %>
+    <% end %>
+    </h5></div>
+    
+    <div class="grid_1"><%= h5alternate(idx) %>
+      <%= image_tag("u.gif",{:style=>"vertical-align: -1px;"}) %>
+      <% unless x.on == 0 %><%= x.on %><% end %>
+    </h5></div>
+    
+    <div class="grid_1 omega"><%= h5alternate(idx) %>
+    <% if x.sentoff == true %>
+      <%= x.sentofftime %>
+    <% else %>
+      <% unless x.subbedby == 0 %>
+      <%= image_tag("d.gif",{:style=>"vertical-align: -1px;"}) %>
+      <% end %>
+      <%= x.off %>
+    <% end %>
+    </h5></div>
+  <% end %> 
+ 
+<% end %>
+
+</div>

@@ -60,33 +60,35 @@ module ApplicationHelper
     round = Goal.first(:conditions => ['time IS NOT NULL'])
     firstmatchwithgoaltime = round.match_id
     @scorers = Goal.find_all_by_match_id(id)
-    temp = Array.new(14) { Array.new(3) }
+    temp = Array.new{Array.new}
     idx = 0
     @scorers.each do |x|
-      temp[idx][0] = x.player.shortname
+      link = "<a href='/players/" + x.player.id.to_s + "'>" + x.player.shortname + "</a>"
       if firstmatchwithgoaltime < id
-        temp[idx][1] = x.time.to_s
+        temp << [link,x.time.to_s,x.time]
       else
-        temp[idx][1] = "1"
+        temp << [link,"1",0]
       end
       if x.penalty == true
         temp[idx][1] = temp[idx][1] + "p"
       end
       idx += 1
     end
-    @owngoals = Owngoal.find_all_by_match_id(id)
+    @owngoals = Oppowngoal.find_all_by_match_id(id)
     @owngoals.each do |x|
-      temp[idx][0] = x.oppplayer.shortname
       if firstmatchwithgoaltime < id
-        temp[idx][1] = x.time.to_s + "og"
+        temp << [x.oppplayer.shortname,x.time.to_s + "og",x.time]
       else
-        temp[idx][1] = "og"
+        temp << [x.oppplayer.shortname,"og",0]
       end
       idx += 1
       end
     if idx == 0
       raw "&nbsp"
-    else
+      else
+      if firstmatchwithgoaltime < id
+        temp = temp.sort_by{|x|x[2]}
+      end
       scorerstring = ""
       goals = idx
       idx = 0
@@ -126,7 +128,80 @@ module ApplicationHelper
       return scorerstring[0,scorerstring.length-2]
     end
   end
-   
+    
+  def constructoppgoalscorersstring(id)
+    round = Oppgoal.first(:conditions => ['time IS NOT NULL'])
+    firstmatchwithgoaltime = round.match_id
+    @scorers = Oppgoal.find_all_by_match_id(id)
+    temp = Array.new{Array.new}
+    idx = 0
+    @scorers.each do |x|
+      link = "<a href='/oppplayers/" + x.oppplayer.id.to_s + "'>" + x.oppplayer.shortname + "</a>"
+      if firstmatchwithgoaltime < id
+        temp << [link,x.time.to_s,x.time]
+      else
+        temp << [link,"1",0]
+      end
+      if x.penalty == true
+        temp[idx][1] = temp[idx][1] + "p"
+      end
+      idx += 1
+    end
+    @owngoals = Owngoal.find_all_by_match_id(id)
+    @owngoals.each do |x|
+      if firstmatchwithgoaltime < id
+        temp << [x.player.shortname,x.time.to_s + "og",x.time]
+      else
+        temp << [x.player.shortname,"og",0]
+      end
+      idx += 1
+      end
+    if idx == 0
+      raw "&nbsp"
+      else
+      if firstmatchwithgoaltime < id
+        temp = temp.sort_by{|x|x[2]}
+      end
+      scorerstring = ""
+      goals = idx
+      idx = 0
+      while idx < goals
+        check_idx = idx + 1
+        while check_idx < goals
+          if temp[check_idx][0] != "{null}"
+            if temp[check_idx][0] == temp[idx][0]
+              temp[check_idx][0] = "{null}"
+              if firstmatchwithgoaltime < id
+                temp[idx][1] = temp[idx][1] + ", " + temp[check_idx][1]
+              else
+                temp[idx][1] = temp[idx][1].to_i + 1  
+                temp[idx][1] = temp[idx][1].to_s  
+              end
+            end
+          end
+        check_idx += 1
+        end
+      idx += 1  
+      end
+      idx = 0
+      while idx < goals
+        if temp[idx][0] != "{null}"
+          if firstmatchwithgoaltime < id
+            scorerstring = scorerstring + temp[idx][0] + " " + temp[idx][1] + ", "
+          else
+            if temp[idx][1] != "1"
+              scorerstring = scorerstring + temp[idx][0] + " [" + temp[idx][1] + "], "
+            else
+              scorerstring = scorerstring + temp[idx][0] + ", "            
+            end  
+          end
+        end
+      idx += 1
+      end
+      return scorerstring[0,scorerstring.length-2]
+    end
+  end 
+  
   def constructopponent(opponent,competition,round,leg,replay)
     if competition == "LGE"
       opponent
@@ -156,8 +231,10 @@ module ApplicationHelper
     when "5" then "Fifth Round"
     when "QF" then "Quarter-finals"
     when "SF" then "Semi-finals"
-    when "F" then 
-      if f > a 
+    when "F" then
+      if f == 999
+        "FINAL"
+      elsif f > a 
         "WINNERS" 
         else
          "Runners-up"
@@ -166,7 +243,18 @@ module ApplicationHelper
     end
   end
   
- def h5alternate(idx)
+  def constructopponentfromdate(matchdate)
+    x = Match.find_by_matchdate(matchdate)
+    constructopponent(x.opponent.shortname,x.competition.abbrev,x.round,x.leg,x.replay)
+  end
+  
+  def getvenuefromdate(matchdate)
+    x = Match.find_by_matchdate(matchdate)
+    "(" + x.han.downcase + ")"
+  end
+    
+    
+  def h5alternate(idx)
    if idx % 2 == 0
      raw "<h5 class='center'>"
      else
@@ -250,6 +338,19 @@ def homevenue(opponents,han)
     opponents
 
   end
+end
+
+def ordinalize(parm)
+  suffix = "th"
+  case parm
+    when 1 then suffix = "st"
+    when 2 then suffix = "nd" 
+    when 3 then suffix = "rd" 
+    when 21 then suffix = "st" 
+    when 22 then suffix = "nd" 
+    when 23 then suffix = "rd" 
+  end
+  parm = parm.to_s + suffix
 end
   
 def othercup(parm)

@@ -10,6 +10,6 @@
 class Owngoal < ActiveRecord::Base
 
   belongs_to :match
-  belongs_to :oppplayer
+  belongs_to :player
 
 end

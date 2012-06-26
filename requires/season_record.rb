@@ -47,7 +47,11 @@ class SeasonRecord < ActiveRecord::Base
   
   def facupround
     round = Match.last(:conditions => ['competition_id = 3 AND season_id = ?', @id])
-    @facupround = [round.round, round.for, round.against]
+    if round.nil?
+      @facuprecord = ["0",0,0]
+    else
+      @facupround = [round.round, round.for, round.against]
+    end
   end
 
   def leaguecupround

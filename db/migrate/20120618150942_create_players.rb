@@ -13,6 +13,7 @@ class CreatePlayers < ActiveRecord::Migration
       t.integer :country_id
       t.text :positionfull
       t.integer :number
+      t.boolean :active
       t.date :loandatesigned
       t.text :loanedfrom
       t.date :datesigned

@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,26 +11,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120619080443) do
+ActiveRecord::Schema.define(:version => 20120624114023) do
 
   create_table "appearances", :force => true do |t|
-    t.integer  "player_id"
-    t.integer  "shirt"
-    t.integer  "off"
-    t.integer  "subbedby"
-    t.boolean  "booked"
-    t.integer  "bookedtime"
-    t.boolean  "sentoff"
-    t.integer  "sentofftime"
-    t.integer  "match_id"
+    t.integer "player_id"
+    t.integer "shirt"
+    t.integer "off",         :default => 90
+    t.integer "subbedby",    :default => 0
+    t.boolean "booked"
+    t.integer "bookedtime"
+    t.boolean "sentoff"
+    t.integer "sentofftime"
+    t.integer "match_id"
+  end
+
+  create_table "cities", :force => true do |t|
+    t.text     "name"
+    t.integer  "country_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "appearances", ["id", "player_id", "match_id"], :name => "app_index"
-  add_index "appearances", ["id"], :name => "index_appearances_on_id", :unique => true
-  add_index "appearances", ["match_id"], :name => "index_appearances_on_match_id"
-  add_index "appearances", ["player_id"], :name => "index_appearances_on_player_id"
 
   create_table "competitions", :force => true do |t|
     t.string   "abbrev"
@@ -39,6 +40,14 @@ ActiveRecord::Schema.define(:version => 20120619080443) do
     t.boolean  "international"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "abbrev2"
+  end
+
+  create_table "countries", :force => true do |t|
+    t.text     "name"
+    t.text     "code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "divisions", :force => true do |t|
@@ -46,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20120619080443) do
     t.integer  "tier"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "abbrev"
   end
 
   create_table "goals", :force => true do |t|
@@ -89,12 +99,38 @@ ActiveRecord::Schema.define(:version => 20120619080443) do
   end
 
   add_index "matches", ["id", "season_id", "matchdate", "opponent_id", "venue_id", "competition_id", "referee_id"], :name => "mat_index"
+  add_index "matches", ["id"], :name => "index_matches_on_id", :unique => true
+  add_index "matches", ["opponent_id"], :name => "index_matches_on_opponent_id"
+  add_index "matches", ["season_id"], :name => "index_matches_on_season_id"
 
   create_table "menus", :force => true do |t|
     t.string   "item"
     t.string   "link"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "oppappearances", :force => true do |t|
+    t.integer  "oppplayer_id"
+    t.integer  "shirt"
+    t.integer  "off"
+    t.integer  "subbedby"
+    t.boolean  "booked"
+    t.integer  "bookedtime"
+    t.boolean  "sentoff"
+    t.integer  "sentofftime"
+    t.integer  "match_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "oppgoals", :force => true do |t|
+    t.integer "oppplayer_id"
+    t.integer "time"
+    t.boolean "penalty"
+    t.integer "match_id"
+    t.boolean "created_at"
+    t.boolean "updated_at"
   end
 
   create_table "opponents", :force => true do |t|
@@ -113,6 +149,14 @@ ActiveRecord::Schema.define(:version => 20120619080443) do
 
   add_index "opponents", ["id"], :name => "index_opponents_on_id", :unique => true
 
+  create_table "oppowngoals", :force => true do |t|
+    t.integer  "oppplayer_id"
+    t.integer  "time"
+    t.integer  "match_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
   create_table "oppplayers", :force => true do |t|
     t.integer  "name"
     t.text     "birthplace"
@@ -124,16 +168,32 @@ ActiveRecord::Schema.define(:version => 20120619080443) do
     t.text     "playingcareer"
     t.text     "positionfull"
     t.text     "shortname"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "oppsubstitutes", :force => true do |t|
+    t.integer  "oppplayer_id"
+    t.integer  "shirt"
+    t.integer  "on"
+    t.integer  "subbed"
+    t.integer  "off"
+    t.integer  "subbedby"
+    t.boolean  "booked"
+    t.integer  "bookedtime"
+    t.boolean  "sentoff"
+    t.boolean  "sentofftime"
+    t.integer  "match_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "owngoals", :force => true do |t|
     t.integer  "oppplayer_id"
     t.integer  "time"
     t.integer  "match_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "players", :force => true do |t|
@@ -167,18 +227,28 @@ ActiveRecord::Schema.define(:version => 20120619080443) do
     t.text     "penpicture"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "active",                :default => false
   end
 
-  add_index "players", ["id", "name", "country_id"], :name => "pla_index"
+  create_table "referees", :force => true do |t|
+    t.string   "name"
+    t.string   "residence"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "seasons", :force => true do |t|
-    t.string   "season"
-    t.integer  "division_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string  "season"
+    t.integer "division_id"
   end
 
-  add_index "seasons", ["id"], :name => "index_seasons_on_id", :unique => true
+  create_table "squadnumbers", :force => true do |t|
+    t.integer  "player_id"
+    t.integer  "season_id"
+    t.integer  "number"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "substitutes", :force => true do |t|
     t.integer  "player_id"
@@ -192,12 +262,15 @@ ActiveRecord::Schema.define(:version => 20120619080443) do
     t.boolean  "sentoff"
     t.integer  "sentofftime"
     t.integer  "match_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
-  add_index "substitutes", ["id"], :name => "index_substitutes_on_id", :unique => true
-  add_index "substitutes", ["match_id"], :name => "index_substitutes_on_match_id"
-  add_index "substitutes", ["player_id"], :name => "index_substitutes_on_player_id"
+  create_table "venues", :force => true do |t|
+    t.string   "name"
+    t.integer  "city_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
 end

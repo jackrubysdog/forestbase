@@ -3,6 +3,7 @@ class CreateDivisions < ActiveRecord::Migration
     create_table :divisions do |t|
       t.string :name
       t.integer :tier
+      t.string :abbrev
 
       t.timestamps
     end

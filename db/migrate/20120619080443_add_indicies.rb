@@ -34,17 +34,8 @@ class AddIndicies < ActiveRecord::Migration
     remove_index :goals, :id
     remove_index :goals, :match_id
     remove_index :goals, :player_id
-    
-    remove_index :matches, :id
-    remove_index :matches, :season_id
-    remove_index :matches, :opponent_id
-    
+        
     remove_index :opponents, :id
-    
-    remove_index :oppplayers, :id
-    
-    remove_index :players, :id
-    remove_index :players, :name
     
     remove_index :seasons, :id
     

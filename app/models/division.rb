@@ -5,6 +5,7 @@
 # id          : integer
 # name        : string(255)
 # tier        : integer
+# abbrev      : string(255)
 # created_at  : datetime
 # updated_at  : datetime
 

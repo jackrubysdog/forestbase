@@ -38,5 +38,9 @@ belongs_to  :country
 has_many    :goals
 has_many    :appearances
 has_many    :substitutes
+has_many    :owngoals
+has_many    :matches, :through => :appearances
+has_many    :seasons, :through => :matches
+has_many    :squadnumbers
   
 end

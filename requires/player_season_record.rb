@@ -1,7 +1,7 @@
 class PlayerSeasonRecord < ActiveRecord::Base
   
-  def initialize(id,player)
-    @id = id
+  def initialize(season_id,player)
+    @id = season_id
     @player_id = Player.find_by_name(player).id
     tmp = Match.find(:last,:conditions=>{:season_id=>@id})
     @lastmatch = tmp.id
@@ -69,6 +69,18 @@ class PlayerSeasonRecord < ActiveRecord::Base
     @othercupgoals = Goal.joins(:match).where("goals.player_id=? AND matches.season_id=? AND matches.competition_id>3",@player_id,@id).count 
   end
 
+  def totalapps
+    @totalapps = Appearance.joins(:match).where("appearances.player_id=? AND matches.season_id=?",@player_id,@id).count 
+  end
+  
+  def totalsubs
+    @totalsubs = Substitute.joins(:match).where("substitutes.player_id=? AND matches.season_id=?",@player_id,@id).count 
+  end
+
+  def totalgoals
+    @totalgoals = Goal.joins(:match).where("goals.player_id=? AND matches.season_id=?",@player_id,@id).count 
+  end
+  
   def careerapps
     @careerapps = Appearance.joins(:match).where("appearances.player_id=? AND matches.id<=?",@player_id,@lastmatch).count 
   end

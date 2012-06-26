@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  id: 1
+  oppplayer: 1
+  shirt: 1
+  off: 1
+  subbedby: 1
+  booked: false
+  bookedtime: 1
+  sentoff: false
+  sentofftime: 1
+  matchid: 1
+
+two:
+  id: 1
+  oppplayer: 1
+  shirt: 1
+  off: 1
+  subbedby: 1
+  booked: false
+  bookedtime: 1
+  sentoff: false
+  sentofftime: 1
+  matchid: 1

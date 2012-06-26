@@ -5,5 +5,6 @@ class ApplicationController < ActionController::Base
   require './requires/season_record'
   require './requires/player_season_record'
   require './requires/player_record'
-    
+  require './requires/opponent_record'   
+
 end

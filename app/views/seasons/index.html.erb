@@ -11,7 +11,10 @@
   <div class="grid_1">
     <%= h5alternate(idx) %><%= tier_roman(season.division.tier) %></h5>
   </div>
-  <div class="grid_1">
+  <% if season.id == 58 %>
+    <div class="grid_9"><h5 class="center">Competition cancelled after three games due to World War Two</h5></div>
+  <% else %>  
+    <div class="grid_1">
     <% played = seasonrecord.played %>
     <% clubs = (played/2)+1 %>
     <%= h5alternate(idx) %><%= checkforzero(played) %></h5>
@@ -39,6 +42,7 @@
   <div class="grid_2">
     <%= h5position(idx, seasonrecord.finalposition, clubs) %><%= checkforzeroslashone(seasonrecord.finalposition,clubs) %></h5>
   </div>
+<% end %>
   <div class="grid_3">
     <%= h5round(idx,cuproundverbose(seasonrecord.facupround[0],seasonrecord.facupround[1],seasonrecord.facupround[2])) %><%= cuproundverbose(seasonrecord.facupround[0],seasonrecord.facupround[1],seasonrecord.facupround[2]) %></h5>
   </div>

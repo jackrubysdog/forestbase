@@ -85,5 +85,17 @@ class PlayerRecord < ActiveRecord::Base
   def othercupgoals
     @othercupgoals = Goal.joins(:match).where("goals.player_id=? AND matches.competition_id>3",@player_id).count 
   end
+    
+  def careerapps
+    @careerapps = Appearance.joins(:match).where("appearances.player_id=?",@player_id).count 
+  end
   
+  def careersubs
+    @careersubs = Substitute.joins(:match).where("substitutes.player_id=?",@player_id).count 
+  end
+
+  def careergoals
+    @careergoals = Goal.joins(:match).where("goals.player_id=?",@player_id).count 
+  end
+    
   end
