@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :ensure_domain, :authorize
+  before_filter :ensure_domain
   
   require './requires/random_image'
   require './requires/season_record'
