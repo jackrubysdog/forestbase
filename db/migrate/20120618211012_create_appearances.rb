@@ -12,7 +12,6 @@ class CreateAppearances < ActiveRecord::Migration
       t.integer :sentofftime
       t.integer :match_id
 
-      t.timestamps
     end
   end
 

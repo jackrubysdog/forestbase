@@ -7,8 +7,7 @@ class CreateCompetitions < ActiveRecord::Migration
       t.boolean :domestic
       t.boolean :european
       t.boolean :international
-
-      t.timestamps
+      
     end
   end
 

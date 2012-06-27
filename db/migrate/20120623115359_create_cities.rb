@@ -5,7 +5,6 @@ class CreateCities < ActiveRecord::Migration
       t.text :name
       t.integer :country_id
 
-      t.timestamps
     end
   end
 end

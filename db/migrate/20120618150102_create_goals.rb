@@ -7,7 +7,6 @@ class CreateGoals < ActiveRecord::Migration
       t.integer :time
       t.integer :match_id
 
-      t.timestamps
     end
   end
 

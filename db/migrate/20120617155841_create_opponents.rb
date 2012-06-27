@@ -12,7 +12,6 @@ class CreateOpponents < ActiveRecord::Migration
       t.integer :previousnameend2
       t.integer :city_id
 
-      t.timestamps
     end
   end
 

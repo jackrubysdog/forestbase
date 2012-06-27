@@ -5,7 +5,6 @@ class CreateVenues < ActiveRecord::Migration
       t.integer :city_id
       t.integer :id
 
-      t.timestamps
     end
   end
 end

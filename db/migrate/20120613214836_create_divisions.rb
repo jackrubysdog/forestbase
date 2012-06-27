@@ -5,7 +5,6 @@ class CreateDivisions < ActiveRecord::Migration
       t.integer :tier
       t.string :abbrev
 
-      t.timestamps
     end
   end
 

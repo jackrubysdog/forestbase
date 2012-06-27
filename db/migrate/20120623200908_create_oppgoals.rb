@@ -7,7 +7,6 @@ class CreateOppgoals < ActiveRecord::Migration
       t.boolean :penalty
       t.integer :match_id
 
-      t.timestamps
     end
   end
 end

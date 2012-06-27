@@ -32,7 +32,6 @@ class CreatePlayers < ActiveRecord::Migration
       t.text :managerialcareer
       t.text :penpicture
 
-      t.timestamps
     end
   end
 

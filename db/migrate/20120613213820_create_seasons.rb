@@ -4,7 +4,6 @@ class CreateSeasons < ActiveRecord::Migration
       t.string :season
       t.integer :division_id
 
-      t.timestamps
     end
   end
 

@@ -14,7 +14,6 @@ class CreateOppsubstitutes < ActiveRecord::Migration
       t.boolean :sentofftime
       t.integer :match_id
 
-      t.timestamps
     end
   end
 end

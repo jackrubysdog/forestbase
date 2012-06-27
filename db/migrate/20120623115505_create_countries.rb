@@ -5,7 +5,6 @@ class CreateCountries < ActiveRecord::Migration
       t.text :name
       t.text :code
 
-      t.timestamps
     end
   end
 end

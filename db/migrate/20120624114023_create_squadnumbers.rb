@@ -6,7 +6,6 @@ class CreateSquadnumbers < ActiveRecord::Migration
       t.integer :season_id
       t.integer :number
 
-      t.timestamps
     end
   end
 end

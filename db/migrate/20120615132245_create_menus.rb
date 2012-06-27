@@ -4,7 +4,6 @@ class CreateMenus < ActiveRecord::Migration
       t.string :item
       t.string :link
 
-      t.timestamps
     end
   end
 

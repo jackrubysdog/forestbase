@@ -13,7 +13,6 @@ class CreateOppplayers < ActiveRecord::Migration
       t.text :positionfull
       t.text :shortname
 
-      t.timestamps
     end
   end
 

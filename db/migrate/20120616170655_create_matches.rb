@@ -25,7 +25,6 @@ class CreateMatches < ActiveRecord::Migration
       t.integer :position
       t.integer :oppposition
       
-      t.timestamps
     end
   end
 

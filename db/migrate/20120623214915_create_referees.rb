@@ -4,8 +4,6 @@ class CreateReferees < ActiveRecord::Migration
       t.integer :id
       t.string :name
       t.string :residence
-
-      t.timestamps
     end
   end
 end
