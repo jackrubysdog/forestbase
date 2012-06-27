@@ -11,14 +11,14 @@ class CreateMatches < ActiveRecord::Migration
       t.string :round
       t.integer :leg
       t.integer :replay
-      t.integer :for
-      t.integer :against
-      t.integer :ht_for
-      t.integer :ht_against
+      t.integer :f
+      t.integer :a
+      t.integer :ht_f
+      t.integer :ht_a
       t.boolean :extratime
       t.boolean :penalties
-      t.integer :penaltiesfor
-      t.integer :penaltiesagainst
+      t.integer :penalties_f
+      t.integer :penalties_a
       t.integer :referee_id
       t.integer :attendance
       t.integer :points

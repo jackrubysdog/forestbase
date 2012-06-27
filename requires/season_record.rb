@@ -9,23 +9,23 @@ class SeasonRecord < ActiveRecord::Base
   end
   
   def won
-    @won = Match.count(:conditions => ['competition_id = 1 AND for > against AND season_id = ?', @id])
+    @won = Match.count(:conditions => ['competition_id = 1 AND f > a AND season_id = ?', @id])
   end
   
   def drawn
-    @drawn = Match.count(:conditions => ['competition_id = 1 AND for = against AND season_id = ?', @id])
+    @drawn = Match.count(:conditions => ['competition_id = 1 AND f = a AND season_id = ?', @id])
   end
   
   def lost
-    @lost = Match.count(:conditions => ['competition_id = 1 AND for < against AND season_id = ?', @id])
+    @lost = Match.count(:conditions => ['competition_id = 1 AND f < a AND season_id = ?', @id])
   end
   
   def f
-    @f = Match.sum('for', :conditions => ['competition_id = 1 AND season_id = ?', @id])
+    @f = Match.sum('f', :conditions => ['competition_id = 1 AND season_id = ?', @id])
   end  
 
   def a
-    @a = Match.sum('against', :conditions => ['competition_id = 1 AND season_id = ?', @id])
+    @a = Match.sum('a', :conditions => ['competition_id = 1 AND season_id = ?', @id])
   end
   
   def points
@@ -50,7 +50,7 @@ class SeasonRecord < ActiveRecord::Base
     if round.nil?
       @facuprecord = ["0",0,0]
     else
-      @facupround = [round.round, round.for, round.against]
+      @facupround = [round.round, round.f, round.a]
     end
   end
 
@@ -59,7 +59,7 @@ class SeasonRecord < ActiveRecord::Base
     if round.nil?
       @leaguecupround = ["0",0,0]
     else
-      @leaguecupround = [round.round, round.for, round.against]
+      @leaguecupround = [round.round, round.f, round.a]
     end
   end
   
@@ -68,7 +68,7 @@ class SeasonRecord < ActiveRecord::Base
     if round.nil?
       @othercupround = ["0","0",0,0]
     else
-      @othercupround = [round.round, round.competition.abbrev, round.for, round.against]
+      @othercupround = [round.round, round.competition.abbrev, round.f, round.a]
     end
   end
   

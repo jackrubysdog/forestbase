@@ -13,13 +13,7 @@ def firstgame
     competition = firstgame.competition.abbrev
   end
   
-  if firstgame.for > firstgame.against
-    result = "W "
-  elsif firstgame.for == firstgame.against
-    result = "D "
-  else
-    result = "L "
-  end
+  result = wld(firstgame.f,firstgame.a)
  
   @firstgame = firstgame.matchdate.strftime("%d %b %Y") + " " + competition + " " + firstgame.han + " " + result + firstgame.for.to_s + "-" + firstgame.against.to_s
 end
@@ -33,13 +27,7 @@ def lastgame
     competition = lastgame.competition.abbrev
   end
   
-  if lastgame.for > lastgame.against
-    result = "W "
-  elsif lastgame.for == lastgame.against
-    result = "D "
-  else
-    result = "L "
-  end
+  result = wld(lastgame.f,lastgame.a)
  
   @lastgame = lastgame.matchdate.strftime("%d %b %Y") + " " + competition + " " + lastgame.han + " " + result + lastgame.for.to_s + "-" + lastgame.against.to_s
 end

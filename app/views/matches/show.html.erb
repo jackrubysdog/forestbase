@@ -3,19 +3,19 @@
   <% if @match.han == "H" %>
     <% hometeam = "Nottingham Forest" %>
     <% awayteam = @match.opponent.name %>
-    <% home_for = @match.for %>
-    <% away_for = @match.against %>
-    <% home_ht_for = @match.ht_for %>
-    <% away_ht_for = @match.ht_against %>
+    <% home_for = @match.f %>
+    <% away_for = @match.a %>
+    <% home_ht_for = @match.ht_f %>
+    <% away_ht_for = @match.ht_a %>
     <% home_gss = constructgoalscorersstring(@match.id) %>
     <% away_gss = constructoppgoalscorersstring(@match.id) %>
   <% else %>
     <% awayteam = "Nottingham Forest" %>
     <% hometeam = @match.opponent.name %>
-    <% away_for = @match.for %>
-    <% home_for = @match.against %>
-    <% away_ht_for = @match.ht_for %>
-    <% home_ht_for = @match.ht_against %>
+    <% away_for = @match.f %>
+    <% home_for = @match.a %>
+    <% away_ht_for = @match.ht_f %>
+    <% home_ht_for = @match.ht_a %>
     <% away_gss = constructgoalscorersstring(@match.id) %>
     <% home_gss = constructoppgoalscorersstring(@match.id) %>
   <% end %>
@@ -71,12 +71,12 @@
   <% if @match.penalties == true %>
     <div class="grid_8 alpha">
     <h6 class="left">
-    <% if @match.penaltiesfor > @match.penaltiesagainst %>
+    <% if @match.penalties_f > @match.penalties_a %>
     Forest won 
     <% else %>
     Forest lost 
     <% end %>
-    <%= @match.penaltiesfor.to_s + "-" + @match.penaltiesagainst.to_s %> on penalties.
+    <%= @match.penalties_f.to_s + "-" + @match.penalties_a.to_s %> on penalties.
   </div>  
   <% end %>
   

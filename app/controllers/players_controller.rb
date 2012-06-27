@@ -11,16 +11,16 @@ class PlayersController < ApplicationController
   end
 
   def show
-    @player = Player.find_by_id(params[:id])
-    
-    sql = "SELECT * FROM SEASONS INNER JOIN MATCHES ON matches.season_id = seasons.id INNER JOIN
-            APPEARANCES ON matches.id = appearances.match_id WHERE appearances.player_id = "+ params[:id] +" GROUP BY seasons.id"
+    @player = Player.find_by_id(params[:id])  
+         
+    sql = "SELECT DISTINCT(seasons.id) FROM SEASONS INNER JOIN MATCHES ON matches.season_id = seasons.id INNER JOIN
+            APPEARANCES ON matches.id = appearances.match_id WHERE appearances.player_id="+ params[:id]
     
     @seasons = Season.find_by_sql(sql)
 
     @title = "Nottingham Forest - " + @player.knownname
   end
-
+  
   def new
   end
 

@@ -1,13 +1,13 @@
-<div style="position: absolute; width: 100px; left: 141px; top: 300px; font-family: Lucida Sans; font-size: 75px; font-style: bold;
-     color: white; text-align: center;"><%= @player.number %></div>   
-
-<div style="position: absolute; width: 140px; left: 118px; top: 286px; font-family: Lucida Sans; font-size: 12px; font-style: extra-bold;
-     color: white; text-align: center;"><%= @player.shortname.upcase %></div>   
-
 <div class="grid_24">
   <h2><%= @player.knownname %></h2>
 </div>
-<div class="grid_24">  
+<div class="grid_24" style="position: relative">  
+<div style="position: absolute; width: 100px; left: 67px; top: 72px; font-family: Lucida Sans; font-size: 75px; font-style: bold;
+     color: white; text-align: center;"><%= @player.number %></div>   
+
+<div style="position: absolute; width: 140px; left: 47px; top: 60px; font-family: Lucida Sans; font-size: 12px; font-style: extra-bold;
+     color: white; text-align: center;"><%= @player.shortname.upcase %></div>   
+
   <div class="grid_6 alpha">
   </br>
   <% if @player.position == "GOL" %>
@@ -66,8 +66,8 @@
      <% end %>
      <div class="grid_2 omega"><h4>App/Gls</h4></div>
   <% @seasons.each_with_index do |x,idx| %>
-     <div class="grid_2 alpha"><%= h5alternate(idx) %><%= x.season %></h5></div>
-     <% season = PlayerSeasonRecord.new(x.season_id,@player.name) %>
+     <div class="grid_2 alpha"><%= h5alternate(idx) %><%= Season.find_by_id(x.id).season %></h5></div>
+     <% season = PlayerSeasonRecord.new(x.id,@player.name) %>
      <div class="grid_2"><%= h5alternate(idx) %><%= season.leagueapps %><% unless season.leaguesubs == 0 %>+<%= season.leaguesubs %><% end %>/<%= season.leaguegoals %></h5></div>
      <div class="grid_2"><%= h5alternate(idx) %><%= season.leaguecupapps %><% unless season.leaguecupsubs == 0 %>+<%= season.leaguecupsubs %><% end %>/<%= season.leaguecupgoals %></h5></div>
      <div class="grid_2"><%= h5alternate(idx) %><%= season.facupapps %><% unless season.facupsubs == 0 %>+<%= season.facupsubs %><% end %>/<%= season.facupgoals %></h5></div>     
