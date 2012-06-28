@@ -8,7 +8,7 @@
 </div>
 <div class="cssmenu">
 <ul>
-  <% @menus = Menu.find(:all) %>
+  <% @menus = Menu.all %>
   <% @menus.each do |menuitem| %>
     <%= active_check(menuitem.item) %><%=  link_to menuitem.item, eval(menuitem.link) %></li>
   <% end %>

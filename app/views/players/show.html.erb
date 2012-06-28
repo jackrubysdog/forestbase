@@ -16,13 +16,13 @@
   <%= image_tag("shirt.gif", :alt => "shirt") %></div>
   <% end %>
   <div class="grid_6">
-  <h6 class="left"></br>Full Name: <%= @player.firstnames + " " + @player.shortname %></br>
-  Birthdate: <%= @player.birthdate.strftime("%B %d, %Y") %></br>
+  <h6 class="left"></br>Full Name: <%= @player.firstnames + " " + @player.shortname %></br></br>
+  Birthdate: <%unless @player.birthdate.nil? %><%= @player.birthdate.strftime("%B %d, %Y") %><% end %></br>
   <% unless @player.deathdate.nil? %>
     <%= "Date of Death: " + checkdeath(@player.deathdate) %></br>
   <% end %>
-  Birthplace: <%= @player.birthplace %></br>
-  Career: <%= @player.playingcareer %></br>
+  Birthplace: <%= @player.birthplace %></br></br>
+  Career: <%= @player.playingcareer %></br></br>
   <% unless @player.managerialcareer.nil? %>
     <%=  "Managerial Career: " + @player.managerialcareer %></br>
   <% end %>
