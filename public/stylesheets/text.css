@@ -52,35 +52,35 @@ strong {
 ----------------------------------------------------------------------------------------------------*/
 
 h1 {
-  font-size: 150%;
+  font-size: 15pt;
   color: white;
   text-align: center;
   background: #666666;
 }
 
 h2 {
-  font-size: 125%;
+  font-size: 12pt;
   color: #666666;
   text-align: left;
   border-bottom: thin solid grey;
 }
 
 h3 {
-  font-size: 150%;
+  font-size: 18pt;
   padding-top: 2px;
   color: white;
   font-weight: bold;
 }
 
 h4 {
-  font-size: 80%;
+  font-size: 10pt;
   color: white;
   font-weight: bold;
   background-color: grey;
 }
 
 h5 {
-  font-size: 80%;
+  font-size: 10pt;
   color: black;
   background: #EEEEEE;
   font-weight: normal;
@@ -150,7 +150,7 @@ h5.relegated {
 }
 
 h6 {
-  font-size: 75%;
+  font-size: 8pt;
   color: #666666;
 }
 
@@ -164,6 +164,11 @@ h6.left {
 
 h6.right {
   text-align: right;  
+}
+
+p {
+  font-size: 7pt;
+  color: #666666;
 }
 
 
