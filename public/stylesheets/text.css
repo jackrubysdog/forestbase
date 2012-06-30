@@ -15,7 +15,7 @@ body {
 
 a {
   text-decoration: none;
-  color: black;
+  color: #333333;
 }
 
 a:hover{
@@ -65,6 +65,10 @@ h2 {
   border-bottom: thin solid grey;
 }
 
+h2 a {
+  color: #666666;
+}
+
 h3 {
   font-size: 18pt;
   padding-top: 2px;
@@ -79,6 +83,10 @@ h4 {
   background-color: grey;
 }
 
+h4 a {
+  color: white;
+}
+
 h5 {
   font-size: 9pt;
   color: black;
@@ -86,6 +94,10 @@ h5 {
   font-weight: normal;
   text-align: left;
   padding-left: 2px;
+}
+
+h5 a {
+  color: black;
 }
 
 h5.center {

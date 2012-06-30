@@ -1,17 +1,17 @@
 <% @matches.each_with_index do |matches, idx| %>
   <div class="grid_1">
-    <%= h5cupcheck(idx,matches.competition_id, false) %><%= link_to idx+1, match_path(matches.id) %></h5>
+    <%= h5cupcheck(idx,matches.competition_id, false) %><%= idx+1 %></h5>
   </div>
   <div class="grid_2">
-    <%= h5cupcheck(idx,matches.competition_id, false) %><%= matches.matchdate.strftime("%a %d %b") %></h5>
+    <%= h5cupcheck(idx,matches.competition_id, false) %><%= link_to matches.matchdate.strftime("%a %d %b"), match_path(matches.id) %></h5>
   </div>
 <% if parm == "season" %>
   <div class="grid_5">
-    <%= h5cupcheck(idx,matches.competition_id, true) %><%= constructopponent(homevenue(matches.opponent.shortname,matches.han),matches.competition.abbrev,matches.round,matches.leg,matches.replay) %></h5>
+    <%= h5cupcheck(idx,matches.competition_id, true) %><%= link_to homevenue(matches.opponent.shortname,matches.han), opponent_path(matches.opponent.id) %><%= constructcompetition(matches.competition.abbrev,matches.round,matches.leg,matches.replay) %></h5>
   </div>
 <% else %>
   <div class="grid_2">
-    <%= h5cupcheck(idx,matches.competition_id, false) %><%= matches.season.season %></h5>
+    <%= h5cupcheck(idx,matches.competition_id, false) %><%= link_to matches.season.season, season_path(matches.season.id) %></h5>
   </div>
   <div class="grid_1">
     <%= h5cupcheck(idx,matches.competition_id, false) %><%= matches.han %></h5>
@@ -20,7 +20,7 @@
     <% if matches.competition.id == 1  %>
     <%= h5cupcheck(idx,matches.competition_id, false) %><%= matches.season.division.name %></h5>    
     <% else %>
-    <% competition = constructopponent("",matches.competition.abbrev2 + " ",matches.round,matches.leg,matches.replay) %>
+    <% competition = constructcompetition(matches.competition.abbrev2 + " ",matches.round,matches.leg,matches.replay) %>
     <%= h5cupcheck(idx,matches.competition_id, false) %><%= competition.gsub(/[()]/, '') %></h5>
     <% end %>
   </div>

@@ -42,5 +42,6 @@ has_many    :owngoals
 has_many    :matches, :through => :appearances
 has_many    :seasons, :through => :matches
 has_many    :squadnumbers
+has_many    :internationals
   
 end

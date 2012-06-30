@@ -11,52 +11,84 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120624114023) do
+ActiveRecord::Schema.define(:version => 20120630130629) do
 
-  create_table "appearances", :force => true do |t|
+  create_table "appearances", :id => false, :force => true do |t|
+    t.integer "id",                          :null => false
     t.integer "player_id"
     t.integer "shirt"
-    t.integer "off"
-    t.integer "subbedby"
-    t.boolean "booked"
+    t.integer "off",         :default => 90
+    t.integer "subbedby",    :default => 0
+    t.integer "booked"
     t.integer "bookedtime"
-    t.boolean "sentoff"
+    t.integer "sentoff"
     t.integer "sentofftime"
     t.integer "match_id"
   end
 
-  create_table "cities", :force => true do |t|
+  create_table "cities", :id => false, :force => true do |t|
+    t.integer "id",         :null => false
     t.text    "name"
     t.integer "country_id"
   end
 
-  create_table "competitions", :force => true do |t|
+  create_table "competitions", :id => false, :force => true do |t|
+    t.integer "id",            :null => false
     t.string  "abbrev"
     t.string  "name"
-    t.boolean "domestic"
-    t.boolean "european"
-    t.boolean "international"
+    t.integer "domestic"
+    t.integer "european"
+    t.integer "international"
+    t.string  "abbrev2"
   end
 
-  create_table "countries", :force => true do |t|
-    t.text "name"
-    t.text "code"
+  create_table "countries", :id => false, :force => true do |t|
+    t.integer "id",   :null => false
+    t.text    "name"
+    t.text    "code"
   end
 
-  create_table "divisions", :force => true do |t|
+  create_table "divisions", :id => false, :force => true do |t|
+    t.integer "id",     :null => false
     t.string  "name"
     t.integer "tier"
     t.string  "abbrev"
   end
 
-  create_table "goals", :force => true do |t|
+  create_table "goals", :id => false, :force => true do |t|
+    t.integer "id",        :null => false
     t.integer "player_id"
-    t.boolean "penalty"
+    t.integer "penalty"
     t.integer "time"
     t.integer "match_id"
   end
 
-  create_table "matches", :force => true do |t|
+  create_table "internationals", :force => true do |t|
+    t.integer "player_id"
+    t.integer "country_id"
+    t.date    "matchdate"
+    t.string  "competition"
+    t.string  "venue"
+    t.string  "han"
+    t.integer "f"
+    t.integer "a"
+    t.integer "shirt"
+    t.integer "on"
+    t.integer "off"
+    t.integer "goals"
+  end
+
+  create_table "managers", :id => false, :force => true do |t|
+    t.integer "id",           :null => false
+    t.text    "name"
+    t.text    "informalname"
+    t.date    "startdate"
+    t.date    "enddate"
+    t.text    "managertype"
+  end
+
+  create_table "matches", :id => false, :force => true do |t|
+    t.integer "id",             :null => false
     t.integer "season_id"
     t.date    "matchdate"
     t.integer "opponent_id"
@@ -66,14 +98,14 @@ ActiveRecord::Schema.define(:version => 20120624114023) do
     t.string  "round"
     t.integer "leg"
     t.integer "replay"
-    t.integer "for"
-    t.integer "against"
-    t.integer "ht_for"
-    t.integer "ht_against"
-    t.boolean "extratime"
-    t.boolean "penalties"
-    t.integer "penaltiesfor"
-    t.integer "penaltiesagainst"
+    t.integer "f"
+    t.integer "a"
+    t.integer "ht_f"
+    t.integer "ht_a"
+    t.integer "extratime"
+    t.integer "penalties"
+    t.integer "penalties_f"
+    t.integer "penalties_a"
     t.integer "referee_id"
     t.integer "attendance"
     t.integer "points"
@@ -81,31 +113,35 @@ ActiveRecord::Schema.define(:version => 20120624114023) do
     t.integer "oppposition"
   end
 
-  create_table "menus", :force => true do |t|
-    t.string "item"
-    t.string "link"
+  create_table "menus", :id => false, :force => true do |t|
+    t.integer "id",   :null => false
+    t.string  "item"
+    t.string  "link"
   end
 
-  create_table "oppappearances", :force => true do |t|
+  create_table "oppappearances", :id => false, :force => true do |t|
+    t.integer "id",           :null => false
     t.integer "oppplayer_id"
     t.integer "shirt"
     t.integer "off"
     t.integer "subbedby"
-    t.boolean "booked"
+    t.integer "booked"
     t.integer "bookedtime"
-    t.boolean "sentoff"
+    t.integer "sentoff"
     t.integer "sentofftime"
     t.integer "match_id"
   end
 
-  create_table "oppgoals", :force => true do |t|
+  create_table "oppgoals", :id => false, :force => true do |t|
+    t.integer "id",           :null => false
     t.integer "oppplayer_id"
     t.integer "time"
-    t.boolean "penalty"
+    t.integer "penalty"
     t.integer "match_id"
   end
 
-  create_table "opponents", :force => true do |t|
+  create_table "opponents", :id => false, :force => true do |t|
+    t.integer "id",                 :null => false
     t.string  "name"
     t.string  "shortname"
     t.integer "previousnamestart"
@@ -117,14 +153,16 @@ ActiveRecord::Schema.define(:version => 20120624114023) do
     t.integer "city_id"
   end
 
-  create_table "oppowngoals", :force => true do |t|
+  create_table "oppowngoals", :id => false, :force => true do |t|
+    t.integer "id",           :null => false
     t.integer "oppplayer_id"
     t.integer "time"
     t.integer "match_id"
   end
 
-  create_table "oppplayers", :force => true do |t|
-    t.integer "name"
+  create_table "oppplayers", :id => false, :force => true do |t|
+    t.integer "id",            :null => false
+    t.text    "name"
     t.text    "birthplace"
     t.integer "country_id"
     t.date    "deathdate"
@@ -136,27 +174,30 @@ ActiveRecord::Schema.define(:version => 20120624114023) do
     t.text    "shortname"
   end
 
-  create_table "oppsubstitutes", :force => true do |t|
+  create_table "oppsubstitutes", :id => false, :force => true do |t|
+    t.integer "id",           :null => false
     t.integer "oppplayer_id"
     t.integer "shirt"
     t.integer "on"
     t.integer "subbed"
     t.integer "off"
     t.integer "subbedby"
-    t.boolean "booked"
+    t.integer "booked"
     t.integer "bookedtime"
-    t.boolean "sentoff"
-    t.boolean "sentofftime"
+    t.integer "sentoff"
+    t.integer "sentofftime"
     t.integer "match_id"
   end
 
-  create_table "owngoals", :force => true do |t|
+  create_table "owngoals", :id => false, :force => true do |t|
+    t.integer "id",           :null => false
     t.integer "oppplayer_id"
     t.integer "time"
     t.integer "match_id"
   end
 
-  create_table "players", :force => true do |t|
+  create_table "players", :id => false, :force => true do |t|
+    t.integer "id",                                   :null => false
     t.text    "name"
     t.text    "shortname"
     t.text    "birthplace"
@@ -168,7 +209,6 @@ ActiveRecord::Schema.define(:version => 20120624114023) do
     t.integer "country_id"
     t.text    "positionfull"
     t.integer "number"
-    t.boolean "active"
     t.date    "loandatesigned"
     t.text    "loanedfrom"
     t.date    "datesigned"
@@ -186,39 +226,45 @@ ActiveRecord::Schema.define(:version => 20120624114023) do
     t.text    "playingcareer"
     t.text    "managerialcareer"
     t.text    "penpicture"
+    t.integer "active",                :default => 0
   end
 
-  create_table "referees", :force => true do |t|
-    t.string "name"
-    t.string "residence"
+  create_table "referees", :id => false, :force => true do |t|
+    t.integer "id",        :null => false
+    t.string  "name"
+    t.string  "residence"
   end
 
-  create_table "seasons", :force => true do |t|
+  create_table "seasons", :id => false, :force => true do |t|
+    t.integer "id",          :null => false
     t.string  "season"
     t.integer "division_id"
   end
 
-  create_table "squadnumbers", :force => true do |t|
+  create_table "squadnumbers", :id => false, :force => true do |t|
+    t.integer "id",        :null => false
     t.integer "player_id"
     t.integer "season_id"
     t.integer "number"
   end
 
-  create_table "substitutes", :force => true do |t|
+  create_table "substitutes", :id => false, :force => true do |t|
+    t.integer "id",          :null => false
     t.integer "player_id"
     t.integer "shirt"
     t.integer "on"
-    t.boolean "subbed"
+    t.integer "subbed"
     t.integer "off"
     t.integer "subbedby"
-    t.boolean "booked"
+    t.integer "booked"
     t.integer "bookedtime"
-    t.boolean "sentoff"
+    t.integer "sentoff"
     t.integer "sentofftime"
     t.integer "match_id"
   end
 
-  create_table "venues", :force => true do |t|
+  create_table "venues", :id => false, :force => true do |t|
+    t.integer "id",      :null => false
     t.string  "name"
     t.integer "city_id"
   end

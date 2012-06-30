@@ -1,0 +1,41 @@
+  <% if @match.han == "H" %>
+    <% hometeam = "link_to 'Nottingham Forest', home_path" %>
+    <% awayteam = "link_to '" + @match.opponent.name + "', opponent_path(" + @match.opponent.id.to_s + ")" %>
+    <% home_for = @match.f %>
+    <% away_for = @match.a %>
+    <% @home_ht_for = @match.ht_f %>
+    <% @away_ht_for = @match.ht_a %>
+    <% home_gss = constructgoalscorersstring(@match.id) %>
+    <% away_gss = constructoppgoalscorersstring(@match.id) %>
+  <% else %>
+    <% awayteam = "link_to 'Nottingham Forest', home_path"%>
+    <% hometeam =  "link_to '" + @match.opponent.name + "', opponent_path(" + @match.opponent.id.to_s + ")" %>
+    <% away_for = @match.f %>
+    <% home_for = @match.a %>
+    <% @away_ht_for = @match.ht_f %>
+    <% @home_ht_for = @match.ht_a %>
+    <% away_gss = constructgoalscorersstring(@match.id) %>
+    <% home_gss = constructoppgoalscorersstring(@match.id) %>
+  <% end %>
+  
+  <div class="grid_7 alpha">
+    <h2><%= eval(hometeam) %></h2>
+  </div>
+  
+  <div class="grid_1 omega">
+    <h1><%= home_for %></h1>
+  </div>
+  
+  <h6 class="left"><%= raw home_gss %></h6>
+  <hr>
+  
+  <div class="grid_7 alpha">
+    <h2><%= eval(awayteam) %></h2>
+  </div>
+  
+  <div class="grid_1 omega">
+    <h1><%= away_for %></h1>
+  </div>
+  
+  <h6 class="left"><%= raw away_gss %></h6>
+  <hr>

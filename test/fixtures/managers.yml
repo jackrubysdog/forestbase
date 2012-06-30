@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  id: 1
+  name: MyString
+  informalname: MyString
+  startdate: 2012-06-29
+  enddate: 2012-06-29
+  type: 
+
+two:
+  id: 1
+  name: MyString
+  informalname: MyString
+  startdate: 2012-06-29
+  enddate: 2012-06-29
+  type: 

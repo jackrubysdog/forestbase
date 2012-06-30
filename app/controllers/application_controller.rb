@@ -8,6 +8,12 @@ class ApplicationController < ActionController::Base
   require './requires/player_record'
   require './requires/opponent_record'  
   
+  # make sure current season is second menu option
+  
+  season = Season.last(:order => :season)
+  @menu = Menu.find_by_id(2)
+  @menu.update_attributes(:item => season.season, :link => "season_path(" + season.id.to_s + ")")
+  
   #
   # RESTORE FOR DOMAIN MASK
   #

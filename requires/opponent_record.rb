@@ -13,9 +13,15 @@ def firstgame
     competition = firstgame.competition.abbrev
   end
   
-  result = wld(firstgame.f,firstgame.a)
+   if firstgame.f > firstgame.a
+    result = "W"
+  elsif firstgame.f == firstgame.a
+    result = "D"
+  else
+    result = "L"
+  end
  
-  @firstgame = firstgame.matchdate.strftime("%d %b %Y") + " " + competition + " " + firstgame.han + " " + result + firstgame.for.to_s + "-" + firstgame.against.to_s
+  @firstgame = "<a href='/match/" + firstgame.id.to_s + "' >" + firstgame.matchdate.strftime("%d %b %Y") + "</a> " + competition + " " + firstgame.han + " " + result + " " + firstgame.f.to_s + "-" + firstgame.a.to_s
 end
 
 def lastgame
@@ -27,33 +33,39 @@ def lastgame
     competition = lastgame.competition.abbrev
   end
   
-  result = wld(lastgame.f,lastgame.a)
+  if lastgame.f > lastgame.a
+    result = "W"
+  elsif lastgame.f == lastgame.a
+    result = "D"
+  else
+    result = "L"
+  end
  
-  @lastgame = lastgame.matchdate.strftime("%d %b %Y") + " " + competition + " " + lastgame.han + " " + result + lastgame.for.to_s + "-" + lastgame.against.to_s
+  @lastgame = "<a href='/match/" + lastgame.id.to_s + "' >" + lastgame.matchdate.strftime("%d %b %Y") + "</a> " + competition + " " + lastgame.han + " " + result + " " + lastgame.f.to_s + "-" + lastgame.a.to_s
 end
-
+  
 def played
   @played = Match.find(:all,:conditions=>{:opponent_id=>@opponent_id,:competition_id=>1}).count
 end
 
 def won
-  @won = Match.count(:conditions => ['opponent_id = ? AND competition_id = 1 AND for > against',@opponent_id])
+  @won = Match.count(:conditions => ['opponent_id = ? AND competition_id = 1 AND f > a',@opponent_id])
 end
 
 def drawn
-  @drawn = Match.count(:conditions => ['opponent_id = ? AND competition_id = 1 AND for = against',@opponent_id])
+  @drawn = Match.count(:conditions => ['opponent_id = ? AND competition_id = 1 AND f = a',@opponent_id])
 end
 
 def lost
-  @lost = Match.count(:conditions => ['opponent_id = ? AND competition_id = 1 AND for < against',@opponent_id])
+  @lost = Match.count(:conditions => ['opponent_id = ? AND competition_id = 1 AND f < a',@opponent_id])
 end
 
-def for
-  @for = Match.sum('for',:conditions => ['opponent_id = ? AND competition_id = 1',@opponent_id])
+def f
+  @f = Match.sum('f',:conditions => ['opponent_id = ? AND competition_id = 1',@opponent_id])
 end
 
-def against
-  @against = Match.sum('against',:conditions => ['opponent_id = ? AND competition_id = 1',@opponent_id])
+def a
+  @a = Match.sum('a',:conditions => ['opponent_id = ? AND competition_id = 1',@opponent_id])
 end
 
 end

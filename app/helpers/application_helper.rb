@@ -69,7 +69,7 @@ module ApplicationHelper
       else
         temp << [link,"1",0]
       end
-      if x.penalty == true
+      if x.penalty == 1
         temp[idx][1] = temp[idx][1] + "p"
       end
       idx += 1
@@ -142,7 +142,7 @@ module ApplicationHelper
       else
         temp << [link,"1",0]
       end
-      if x.penalty == true
+      if x.penalty == 1
         temp[idx][1] = temp[idx][1] + "p"
       end
       idx += 1
@@ -202,23 +202,24 @@ module ApplicationHelper
     end
   end 
   
-  def constructopponent(opponent,competition,round,leg,replay)
+  def constructcompetition(competition,round,leg,replay)
     if competition == "LGE"
-      opponent
+      ""
     elsif
       leg == 1
-        opponent + " (" + competition + round + ":1L)"
+        " (" + competition + round + ":1L)"
     elsif
       leg == 2
-        opponent + " (" + competition + round + ":2L)"
+        " (" + competition + round + ":2L)"
     elsif
       replay.nil?
-        opponent + " (" + competition + round + ")"
+        " (" + competition + round + ")"
     elsif
       replay == 1
-        opponent + " (" + competition + round + " R)"
-    else
-        opponent + " (" + competition + round + " " + replay.to_s + "R)"
+        " (" + competition + round + " R)"
+    else unless replay == 0
+        " (" + competition + round + " " + replay.to_s + "R)"
+    end
     end
   end
   
@@ -245,7 +246,7 @@ module ApplicationHelper
   
   def constructopponentfromdate(matchdate)
     x = Match.find_by_matchdate(matchdate)
-    constructopponent(x.opponent.shortname,x.competition.abbrev,x.round,x.leg,x.replay)
+    x.opponent.shortname + " " + constructcompetition(x.competition.abbrev,x.round,x.leg,x.replay)
   end
   
   def getvenuefromdate(matchdate)

@@ -1,11 +1,5 @@
 Forestbase::Application.routes.draw do
 
-  get "oppplayer/show"
-
-  get "oppplayer/edit"
-
-  get "oppplayer/update"
-
   match "/home"    => 'pages#home'
   
   match "/seasons" => 'seasons#index'
@@ -20,6 +14,10 @@ Forestbase::Application.routes.draw do
   match '/oppplayers/:id', :to => 'oppplayers#show' , :as => :oppplayer
 
   match '/match/:id', :to => 'matches#show' , :as => :match
+
+  match "/managers" => 'managers#index'
+  match '/managers/:id', :to => 'managers#show' , :as => :manager
+
   
   root :to => 'pages#home'
 end

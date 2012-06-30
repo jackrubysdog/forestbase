@@ -4,8 +4,8 @@
   <div class="grid_6"><%= h5alternate_left(idx) %><%= link_to x.name, x %></h5></div>
   <div class="grid_2"><%= h5alternate(idx) %><%= x.city.country.code %></h5></div>
   <% opponent = OpponentRecord.new(x.id) %>
-  <div class="grid_4"><%= h5alternate(idx) %><%= opponent.firstgame %></h5></div>
-  <div class="grid_4"><%= h5alternate(idx) %><%= opponent.lastgame %></h5></div>
+  <div class="grid_4"><%= h5alternate(idx) %><%= raw opponent.firstgame %></h5></div>
+  <div class="grid_4"><%= h5alternate(idx) %><%= raw opponent.lastgame %></h5></div>
   <% played = opponent.played %>
   <div class="grid_1"><%= h5alternate(idx) %><%= checkforzero(played) %></h5></div>
   <% won = opponent.won %>
@@ -13,8 +13,8 @@
   <% drawn = opponent.drawn %>
   <div class="grid_1"><%= h5alternate(idx) %><%= checkforzero(drawn) %></h5></div>
   <div class="grid_1"><%= h5alternate(idx) %><%= checkforzero(opponent.lost) %></h5></div>
-  <div class="grid_1"><%= h5alternate(idx) %><%= checkforzero(opponent.for) %></h5></div>
-  <div class="grid_1"><%= h5alternate(idx) %><%= checkforzero(opponent.against) %></h5></div>
+  <div class="grid_1"><%= h5alternate(idx) %><%= checkforzero(opponent.f) %></h5></div>
+  <div class="grid_1"><%= h5alternate(idx) %><%= checkforzero(opponent.a) %></h5></div>
   <% if played == 0 %>
   <div class="grid_1"><%= h5alternate(idx) %>-</h5></div>
   <div class="grid_1"><%= h5alternate(idx) %>-</h5></div>

@@ -6,7 +6,7 @@ class SeasonsController < ApplicationController
   
   def index
     @title   = "Seasons"
-    @seasons = Season.find(:all, :order => "season DESC")
+    @seasons = Season.find(:all,:order => "season DESC")
   end
   
   def show

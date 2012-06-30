@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  id: 1
+  player_id: 1
+  country_id: 1
+  matchdate: 2012-06-30
+  competition: MyString
+  venue: MyString
+  han: MyString
+  f: 1
+  a: 1
+  shirt: 1
+  on: 1
+  off: 1
+  goals: 1
+
+two:
+  id: 1
+  player_id: 1
+  country_id: 1
+  matchdate: 2012-06-30
+  competition: MyString
+  venue: MyString
+  han: MyString
+  f: 1
+  a: 1
+  shirt: 1
+  on: 1
+  off: 1
+  goals: 1

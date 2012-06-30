@@ -1,0 +1,52 @@
+<% @managers.each_with_index do |x, idx| %>
+  <div class="grid_6">
+    <%= h5alternate(idx) %><%= link_to x.name, x %></h5>
+  </div>
+  <div class="grid_4">
+    <%= h5alternate(idx) %><%= managertype(x.managertype) %></h5>
+  </div>
+  <div class="grid_3">
+    <%= h5alternate(idx) %><%= x.startdate.strftime("%B %d, %Y") %></h5>
+  </div>
+  <div class="grid_3">
+    <%= h5alternate(idx) %><%= managerenddate(x.enddate.strftime("%B %d, %Y")) %></h5>
+  </div>
+  <div class="grid_1">
+    <% played = Match.count(:all,:conditions=>{:matchdate=>x.startdate..x.enddate,:competition_id=>1}) %>
+    <%= h5alternate(idx) %><%= played %></h5>   
+  </div>
+  <div class="grid_1">
+    <% won = Match.where("competition_id=1 AND f>a AND matchdate BETWEEN ? AND ?",x.startdate,x.enddate).count %>
+    <%= h5alternate(idx) %><%= won %></h5>   
+  </div>
+  <div class="grid_1">
+    <% drawn = Match.where("competition_id=1 AND f=a AND matchdate BETWEEN ? AND ?",x.startdate,x.enddate).count %>
+    <%= h5alternate(idx) %><%= drawn %></h5>   
+  </div>
+  <div class="grid_1">
+    <%= h5alternate(idx) %><%= Match.where("competition_id=1 AND f<a AND matchdate BETWEEN ? AND ?",x.startdate,x.enddate).count %></h5>   
+  </div>
+  <div class="grid_1">
+    <%= h5alternate(idx) %><%= Match.sum('f',:conditions=>{:matchdate=>x.startdate..x.enddate,:competition_id=>1}) %></h5>   
+  </div>
+  <div class="grid_1">
+    <%= h5alternate(idx) %><%= Match.sum('a',:conditions=>{:matchdate=>x.startdate..x.enddate,:competition_id=>1}) %></h5>   
+  </div>
+  <div class="grid_1">
+    <%= h5alternate(idx) %>
+    <% if won == 0 %>
+      .000
+      <% else %>
+      <%="." + ((won*1000)/played).to_s %>
+      <% end %></h5>
+  </div>
+  <div class="grid_1">
+    <%= h5alternate(idx) %>
+    <% if played == 0 %>
+    0.00
+    <% else %>
+    <%= number_with_precision((((won.to_f*3)+drawn)/played), :precision => 2) %>
+    <% end %></h5>
+  </div>
+<% end %>
+  

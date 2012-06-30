@@ -185,6 +185,7 @@ body {
 .grid_22,
 .grid_23,
 .grid_24,
+.grid_16_r_to_g_gradient,
 .grid_24_r_to_g_gradient {
   display: inline;
   float: left;
@@ -327,6 +328,12 @@ body {
 .container_24 .grid_24 {
   width: 950px;
 }
+
+.container_24 .grid_16_r_to_g_gradient {
+  width: 630px;
+  background-image:url('../images/dr_to_r_gradient.gif');
+  background-repeat: repeat-x;
+} 
 
 .container_24 .grid_24_r_to_g_gradient {
   width: 950px;
