@@ -34,6 +34,11 @@ body {
   -moz-border-radius: 10px;
 }
 
+background {
+  background-image:url('../images/bg630.gif'); 
+}
+
+
 .cssmenu{
   float: left;
   border: none;
