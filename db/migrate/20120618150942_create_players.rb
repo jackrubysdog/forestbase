@@ -31,7 +31,8 @@ class CreatePlayers < ActiveRecord::Migration
       t.text :playingcareer
       t.text :managerialcareer
       t.text :penpicture
-
+      t.integer :capsbefore
+      t.integer :capsafter
     end
   end
 

@@ -18,6 +18,8 @@ Forestbase::Application.routes.draw do
   match "/managers" => 'managers#index'
   match '/managers/:id', :to => 'managers#show' , :as => :manager
 
+  match "/internationals" => 'internationals#index'
+  match '/internationals/:id', :to => 'internationals#show' , :as => :international
   
   root :to => 'pages#home'
 end

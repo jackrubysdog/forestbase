@@ -1,0 +1,2 @@
+module InternationalsHelper
+end

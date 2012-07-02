@@ -1,0 +1,44 @@
+<%= render 'internationals/show_header' %>
+
+<% @internationals.each_with_index do |x, idx| %>
+  <div class="grid_1">
+    <%= h5alternate(idx) %><%= idx + 1 %></h5>
+  </div>
+  <div class="grid_3">
+    <%= h5alternate(idx) %><%= x.matchdate.strftime("%B %d, %Y") %></h5>
+  </div>
+  <div class="grid_4">
+    <%= h5alternate(idx) %><%= x.country.name %></h5>
+  </div>
+  <div class="grid_1">
+    <%= h5alternate(idx) %><%= x.han %></h5>
+  </div>
+  <div class="grid_7">
+    <%= h5alternate(idx) %><%= x.venue %></h5>
+  </div>
+  <div class="grid_2">
+    <%= h5alternate(idx) %><%= x.competition %></h5>
+  </div>
+  <div class="grid_1">
+    <%= h5alternate(idx) %><%= wld(x.f,x.a) %></h5>
+  </div>
+  <div class="grid_1">
+    <%= h5alternate(idx) %><%= x.f.to_s + "-" + x.a.to_s %></h5>
+  </div>
+  <div class="grid_1">
+    <%= h5alternate(idx) %><%= x.shirt %></h5>
+  </div>
+  <div class="grid_1">
+    <% if x.on == 999 %>
+    <%= h5alternate(idx) %>?</h5>
+    <% else %>
+    <%= h5alternate(idx) %><%= x.on %></h5>
+    <% end %>
+</div>
+  <div class="grid_1">
+    <%= h5alternate(idx) %><%= x.off %></h5>
+  </div>
+  <div class="grid_1">
+    <%= h5alternate(idx) %><%= checkforzero(x.goals) %></h5>
+  </div>
+<% end %>
