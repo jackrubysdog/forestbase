@@ -1,0 +1,21 @@
+<% sql = "SELECT player_id, MIN(debut)-MIN(players.birthdate) AS apps FROM (SELECT player_id, MIN(matches.matchdate) AS debut FROM
+  appearances INNER JOIN matches ON appearances.match_id=matches.id GROUP BY player_id UNION SELECT player_id, MIN(matches.matchdate)
+  AS debut FROM substitutes INNER JOIN matches ON substitutes.match_id=matches.id GROUP BY player_id) AS foo INNER JOIN players ON 
+  foo.player_id=players.id GROUP BY player_id ORDER BY apps LIMIT 25" %>
+<% @apps = Appearance.find_by_sql(sql) %>
+<% @apps.each do |x| %>
+  <% yy = (x.apps.to_i/365.25).to_i %>
+  <% dd = (x.apps.to_i-(yy*365.25)).to_i %>
+  <% x.apps = yy.to_s + "y " + dd.to_s + "d" %>
+<%  end %>
+<% sql = "SELECT player_id, MIN(debut)-MIN(players.birthdate) AS apps FROM (SELECT player_id, MIN(matches.matchdate) AS debut FROM
+  appearances INNER JOIN matches ON appearances.match_id=matches.id GROUP BY player_id UNION SELECT player_id, MIN(matches.matchdate)
+  AS debut FROM substitutes INNER JOIN matches ON substitutes.match_id=matches.id GROUP BY player_id) AS foo INNER JOIN players ON 
+  foo.player_id=players.id WHERE players.active=1 GROUP BY player_id ORDER BY apps LIMIT 25" %>
+<% @a_apps = Appearance.find_by_sql(sql) %>
+<% @a_apps.each do |x| %>
+  <% yy = (x.apps.to_i/365.25).to_i %>
+  <% dd = (x.apps.to_i-(yy*365.25)).to_i %>
+  <% x.apps = yy.to_s + "y " + dd.to_s + "d" %>
+<%  end %>
+<%= render 'leaders/playerstable' %>

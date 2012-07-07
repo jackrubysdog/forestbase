@@ -1,0 +1,9 @@
+<div class="grid_8">
+  <h2>STATISTIC</h2>
+  <div class="grid_8 alpha">
+    <h4>Select a statistic from the list below</h4>
+  </div>
+<%= render 'leaders/menu', :key => @key %>
+</div>
+<% string = "leaders/leaders_" + @key.to_s %>
+<%= render string %>

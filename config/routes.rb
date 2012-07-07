@@ -11,8 +11,10 @@ Forestbase::Application.routes.draw do
   match "/opponents" => 'opponents#index'
   match '/opponents/:id', :to => 'opponents#show' , :as => :opponent
   
-  match '/oppplayers/:id', :to => 'oppplayers#show' , :as => :oppplayer
+  match '/oppplayer/:id', :to => 'oppplayers#show' , :as => :oppplayer
 
+  match '/leaders' => 'leaders#show'
+  
   match '/match/:id', :to => 'matches#show' , :as => :match
 
   match "/managers" => 'managers#index'

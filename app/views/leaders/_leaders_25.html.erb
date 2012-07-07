@@ -1,0 +1,3 @@
+<% @apps = Oppgoal.select("oppgoals.oppplayer_id,count(oppgoals.oppplayer_id) as apps").group("oppgoals.oppplayer_id").order("apps DESC").limit(25) %>
+<% @a_apps = Oppgoal.select("oppgoals.oppplayer_id,count(oppgoals.oppplayer_id) as apps").group("oppgoals.oppplayer_id").order("apps DESC").limit(25) %>
+<%= render 'leaders/oppplayerstable' %>

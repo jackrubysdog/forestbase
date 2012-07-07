@@ -9,7 +9,7 @@
     <%= h5alternate(idx) %><%= x.position %></h5>
   </div>
   <div class="grid_2">
-    <%= h5alternate(idx) %><%= constructyears(x.id,@playerrecord.firstgame.year,@playerrecord.lastgame.year) %></h5>
+    <%= h5alternate(idx) %><%= constructyears(x.id,@playerrecord.firstgame.year,@playerrecord.lastgame.year,x.active) %></h5>
   </div>
   <%= render 'seasons/playerstats', :idx => idx %>
 <% end %>

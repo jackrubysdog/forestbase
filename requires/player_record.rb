@@ -27,7 +27,7 @@ class PlayerRecord < ActiveRecord::Base
       @lastgame = sublast.match.matchdate
     elsif sublast.nil?
       @lastgame = applast.match.matchdate
-    elsif applast.match.matchdate < sublast.match.matchdate
+    elsif applast.match.matchdate > sublast.match.matchdate
       @lastgame = applast.match.matchdate
     else
       @lastgame = sublast.match.matchdate

@@ -12,12 +12,15 @@
   <div class="grid_3"><%= h5alternate(idx) %><%= player.country.name %></h5></div>
   <% end %>
   <% first = International.first(:conditions=>{:player_id=>x.player_id},:order=>:id) %>
-  <div class="grid_7"><%= h5alternate(idx) %><%= first.matchdate.strftime("%B %d, %Y") + " v " + first.country.name + " (" + first.competition + ")" %></h5></div>
+  <div class="grid_7"><%= h5alternate(idx) %><%= first.matchdate.strftime("%B %d, %Y") + " v " + first.country.name + " (" + first.competition + ")" %>
+  <% if x.player_id == 9999 %>
+   
+  <% elsif player.capsbefore == 0 %>*<% end %>
+  </h5></div>
   <% last = International.last(:conditions=>{:player_id=>x.player_id},:order=>:id) %>
   <div class="grid_7"><%= h5alternate(idx) %><%= last.matchdate.strftime("%B %d, %Y") + " v " + last.country.name + " (" + last.competition + ")" %></h5></div>
   <% caps = International.count(:conditions=>{:player_id=>x.player_id}) %>
   <div class="grid_1"><%= h5alternate(idx) %><%= caps %></h5></div>
   <% goals = International.sum(:goals,:conditions=>{:player_id=>x.player_id}) %>
   <div class="grid_1"><%= h5alternate(idx) %><%= checkforzero(goals) %></h5></div>
-
 <% end %>

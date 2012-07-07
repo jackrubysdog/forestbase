@@ -1,0 +1,3 @@
+<% @apps = Appearance.select("appearances.player_id,count(appearances.player_id) as apps").joins(:match).where("competition_id=1").group("appearances.player_id").order("apps DESC").limit(25) %>
+<% @a_apps = Appearance.select("appearances.player_id,count(appearances.player_id) as apps").joins(:player,:match).where("players.active=1 AND competition_id=1").group("appearances.player_id").order("apps DESC").limit(25) %>
+<%= render 'leaders/playerstable' %>

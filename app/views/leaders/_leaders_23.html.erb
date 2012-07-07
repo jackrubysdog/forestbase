@@ -1,0 +1,19 @@
+<% sql = "SELECT player_id, MIN(matches.matchdate)-MIN(players.birthdate) AS apps FROM goals INNER JOIN matches ON
+  goals.match_id=matches.id INNER JOIN players ON player_id=players.id WHERE players.birthdate IS NOT NULL
+  GROUP BY player_id ORDER BY apps LIMIT 25" %>
+<% @apps = Appearance.find_by_sql(sql) %>
+<% @apps.each do |x| %>
+  <% yy = (x.apps.to_i/365.25).to_i %>
+  <% dd = (x.apps.to_i-(yy*365.25)).to_i %>
+  <% x.apps = yy.to_s + "y " + dd.to_s + "d" %>
+<%  end %>
+<% sql = "SELECT player_id, MIN(matches.matchdate)-MIN(players.birthdate) AS apps FROM goals INNER JOIN matches ON
+  goals.match_id=matches.id INNER JOIN players ON player_id=players.id WHERE players.birthdate IS NOT NULL
+  AND players.active=1 GROUP BY player_id ORDER BY apps LIMIT 25" %>
+<% @a_apps = Appearance.find_by_sql(sql) %>
+<% @a_apps.each do |x| %>
+  <% yy = (x.apps.to_i/365.25).to_i %>
+  <% dd = (x.apps.to_i-(yy*365.25)).to_i %>
+  <% x.apps = yy.to_s + "y " + dd.to_s + "d" %>
+<%  end %>
+<%= render 'leaders/playerstable' %>

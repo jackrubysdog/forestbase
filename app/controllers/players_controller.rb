@@ -14,7 +14,7 @@ class PlayersController < ApplicationController
     @player = Player.find_by_id(params[:id])  
          
     sql = "SELECT DISTINCT(seasons.id) FROM SEASONS INNER JOIN MATCHES ON matches.season_id = seasons.id INNER JOIN
-            APPEARANCES ON matches.id = appearances.match_id WHERE appearances.player_id="+ params[:id]
+            APPEARANCES ON matches.id = appearances.match_id WHERE appearances.player_id="+ params[:id] + " ORDER BY seasons.id"
     
     @seasons = Season.find_by_sql(sql)
 

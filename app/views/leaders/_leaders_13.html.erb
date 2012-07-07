@@ -1,0 +1,3 @@
+<% @apps = Goal.select("goals.player_id,count(goals.player_id) as apps").joins(:match).where("competition_id=2").group("goals.player_id").order("apps DESC").limit(25) %>
+<% @a_apps = Goal.select("goals.player_id,count(goals.player_id) as apps").joins(:player,:match).where("players.active=1 AND competition_id=2").group("goals.player_id").order("apps DESC").limit(25) %>
+<%= render 'leaders/playerstable' %>

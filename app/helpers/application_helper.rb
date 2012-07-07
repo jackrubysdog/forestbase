@@ -42,9 +42,9 @@ module ApplicationHelper
     end
   end
   
-  def constructyears(id,first,last)
+  def constructyears(id,first,last,active)
     temp = Player.find_by_id(id)
-    if temp.datesignedsecondspell.nil?
+    if temp.datesignedsecondspell.blank?
       ast = ""
     else
       ast = "*"
@@ -52,7 +52,11 @@ module ApplicationHelper
     if first == last
       first.to_s + ast
     else
+      if active == 1
+      first.to_s + "-"  + ast       
+      else
       first.to_s + "-" + last.to_s + ast
+      end
     end
   end
 

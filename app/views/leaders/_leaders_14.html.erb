@@ -1,0 +1,8 @@
+<% sql = "SELECT player_id, COUNT(player_id) AS apps FROM goals INNER JOIN matches ON goals.match_id = matches.id INNER JOIN
+    competitions ON matches.competition_id = competitions.id WHERE competitions.european=1 GROUP BY player_id ORDER BY apps DESC LIMIT 25"%>
+<% @apps = Goal.find_by_sql(sql) %>
+<% sql = "SELECT player_id, COUNT(player_id) AS apps FROM goals INNER JOIN matches ON goals.match_id = matches.id INNER JOIN
+    competitions ON matches.competition_id = competitions.id INNER JOIN players ON goals.player_id = players.id
+    WHERE competitions.european=1 AND players.active=1 GROUP BY player_id ORDER BY apps DESC LIMIT 25"%>
+<% @a_apps = Goal.find_by_sql(sql) %>
+<%= render 'leaders/playerstable' %>

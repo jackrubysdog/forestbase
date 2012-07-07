@@ -1,0 +1,9 @@
+<% sql = "SELECT player_id, SUM(apps) as apps FROM (SELECT player_id, COUNT(player_id) AS apps FROM appearances
+    GROUP BY player_id UNION SELECT player_id, COUNT(player_id) AS apps FROM substitutes GROUP BY player_id) AS foo GROUP
+    BY player_id ORDER BY apps DESC LIMIT 25" %>
+<% @apps = Appearance.find_by_sql(sql) %>
+<% sql = "SELECT player_id, SUM(apps) as apps FROM (SELECT player_id, COUNT(player_id) AS apps FROM appearances
+    GROUP BY player_id UNION SELECT player_id, COUNT(player_id) AS apps FROM substitutes GROUP BY player_id) AS foo INNER
+    JOIN players ON foo.player_id=players.id WHERE players.active=1 GROUP BY player_id ORDER BY apps DESC LIMIT 25" %>
+<% @a_apps = Appearance.find_by_sql(sql) %>
+<%= render 'leaders/playerstable' %>

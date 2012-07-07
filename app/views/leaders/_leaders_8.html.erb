@@ -1,0 +1,12 @@
+<% sql = "SELECT player_id, SUM(time_off-time_on) AS apps FROM (SELECT player_id, 1 AS time_on,
+    appearances.off+1 AS time_off, match_id FROM appearances UNION SELECT player_id, substitutes.on
+    AS time_on, substitutes.off+1 AS time_off, match_id FROM substitutes WHERE substitutes.on IS NOT NULL) AS foo INNER JOIN matches
+    ON foo.match_id=matches.id GROUP BY player_id ORDER BY apps DESC LIMIT 25" %>
+<% @apps = Appearance.find_by_sql(sql) %>
+<% sql = "SELECT player_id, SUM(time_off-time_on) AS apps FROM (SELECT player_id, 1 AS time_on,
+    appearances.off+1 AS time_off, match_id FROM appearances INNER JOIN players ON appearances.player_id=players.id
+    WHERE players.active=1 UNION SELECT player_id, substitutes.on AS time_on, substitutes.off+1 AS time_off, match_id
+    FROM substitutes INNER JOIN players ON substitutes.player_id=players.id WHERE players.active=1 AND substitutes.on
+    IS NOT NULL) AS foo INNER JOIN matches ON foo.match_id=matches.id GROUP BY player_id ORDER BY apps DESC LIMIT 25" %>
+<% @a_apps = Appearance.find_by_sql(sql) %>
+<%= render 'leaders/playerstable' %>
