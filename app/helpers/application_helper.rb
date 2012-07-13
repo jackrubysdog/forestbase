@@ -136,6 +136,7 @@ module ApplicationHelper
   def constructoppgoalscorersstring(id)
     round = Oppgoal.first(:conditions => ['time IS NOT NULL'])
     firstmatchwithgoaltime = round.match_id
+    firstmatchwithgoaltime = 4140    
     @scorers = Oppgoal.find_all_by_match_id(id)
     temp = Array.new{Array.new}
     idx = 0
