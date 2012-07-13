@@ -1,0 +1,40 @@
+  <% if alpha == true %>  
+    <div class="grid_1 alpha">
+  <%else%>
+    <div class="grid_1">
+  <%  end %>
+  <% played = Match.joins(:competition).where("competitions.domestic=1 AND competition_id>3 AND matchdate BETWEEN ? AND ?",startdate,enddate).count %>
+  <%= h5alternate(idx) %><%= played %></h5>   
+  </div>
+  <div class="grid_1">
+  <% won = Match.joins(:competition).where("competitions.domestic=1 AND competition_id>3 AND f>a AND matchdate BETWEEN ? AND ?",startdate,enddate).count %>
+  <%= h5alternate(idx) %><%= won %></h5>   
+  </div>
+  <div class="grid_1">
+  <% drawn = Match.joins(:competition).where("competitions.domestic=1 AND competition_id>3 AND f=a AND matchdate BETWEEN ? AND ?",startdate,enddate).count %>
+  <%= h5alternate(idx) %><%= drawn %></h5>   
+  </div>
+  <div class="grid_1">
+  <%= h5alternate(idx) %><%= Match.joins(:competition).where("competitions.domestic=1 AND competition_id>3 AND f<a AND matchdate BETWEEN ? AND ?",startdate,enddate).count %></h5>
+  </div>
+  <div class="grid_1">
+  <%= h5alternate(idx) %><%= Match.joins(:competition).where("competitions.domestic=1 AND competition_id>3 AND matchdate BETWEEN ? AND ?",startdate,enddate).sum(:f) %></h5>
+  </div>
+  <div class="grid_1">
+  <%= h5alternate(idx) %><%= Match.joins(:competition).where("competitions.domestic=1 AND competition_id>3 AND matchdate BETWEEN ? AND ?",startdate,enddate).sum(:a) %></h5>
+  </div>
+  <div class="grid_1">
+  <%= h5alternate(idx) %>
+    <% if won == 0 %>
+      .000
+      <% else %>
+      <%="." + ((won*1000)/played).to_s %>
+      <% end %></h5>
+  </div>
+  <% if alpha == true %>    
+    <div class="grid_1 omega">
+  <%else%>
+    <div class="grid_1">
+  <%  end %>
+    <%= h5alternate(idx) %>-</h5>
+  </div>

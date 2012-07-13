@@ -13,6 +13,12 @@ body {
   text-align: center;
 }
 
+p { 
+  font-family: arial, sans-serif;
+  font-size: 11px;
+  color:#272727;
+}
+
 a {
   text-decoration: none;
   color: #333333;
@@ -97,7 +103,7 @@ h4 a {
 
 h5 {
   font-size: 9pt;
-  color: black;
+  color: #333333;
   background: #EEEEEE;
   font-weight: normal;
   text-align: left;
@@ -105,7 +111,7 @@ h5 {
 }
 
 h5 a {
-  color: black;
+  color: #333333;
 }
 
 h5.center {
@@ -170,6 +176,7 @@ h5.relegated {
 }
 
 h6 {
+  font-family: arial, sans-serif;
   font-size: 8pt;
   color: #666666;
 }
@@ -185,12 +192,6 @@ h6.left {
 h6.right {
   text-align: right;  
 }
-
-p {
-  font-size: 7pt;
-  color: #666666;
-}
-
 
 /* `Spacing
 ----------------------------------------------------------------------------------------------------*/
