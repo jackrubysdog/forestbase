@@ -1,0 +1,152 @@
+<div class="grid_24_r_to_g_gradient">
+  <h3>NOTTINGHAM FOREST - HONOURS AND RECORDS</h3>
+</div>
+<div class="grid_24">
+  <h2>HONOURS</h2>
+<div class="grid_8 alpha">
+  <h4>DOMESTIC LEAGUE</h4>
+  <h5 class="grey">DIVISION ONE (TOP TIER)</h5>
+  <p>WINNERS (1): 1977-78</br>Runners-up (2): 1966-67, 1978-79</p>
+  <h5 class="grey">DIVISION TWO (SECOND TIER)</h5>
+  <p>WINNERS (3): 1906-07, 1921-22, 1997-98</br>Runners-up (2): 1956-57, 1993-94</p>
+  <h5 class="grey">DIVISION THREE (THIRD TIER)</h5>
+  <p>WINNERS (1): 1950-51</br>Runners-up (1): 2007-08</p>
+  <h5 class="grey">FOOTBALL (NORTHERN) ALLIANCE</h5>
+  <p>WINNERS (1): 1891-92</p>
+</div>
+<div class="grid_8">
+  <h4>DOMESTIC CUP</h4>
+  <h5 class="grey">FA CUP</h5>
+  <p>WINNERS (2): 1898, 1959</br>Runners-up (1): 1991</p>
+  <h5 class="grey">LEAGUE CUP</h5>
+  <p>WINNERS (4): 1978, 1979, 1989, 1990</br>Runners-up (2): 1980, 1992</p>
+  <h5 class="grey">FA CHARITY SHIELD</h5>
+  <p>WINNERS (1): 1978</br>Runners-up (1): 1959</p>
+  <h5 class="grey">FULL MEMBERS CUP</h5>
+  <p>WINNERS (2): 1989, 1992</p>
+  <h5 class="grey">ANGLO-SCOTTISH CUP</h5>
+  <p>WINNERS (1): 1976</p>
+</div>
+<div class="grid_8 omega">
+  <h4>EUROPEAN/WORLDWIDE</h4>
+  <h5 class="grey">EUROPEAN CHAMPION CLUBS' CUP</h5>
+  <p>WINNERS (2): 1979, 1980</p>
+  <h5 class="grey">EUROPEAN SUPER CUP</h5>
+  <p>WINNERS (1): 1979</br>Runners-up (1): 1980</p>
+  <h5 class="grey">TOYOTA (INTERCONTINENTAL) CUP</h5>
+  <p>Runners-up (1): 1980</p>
+</div>
+</div>
+<div class="grid_24">
+  <h2>RECORDS</h2>
+<div class="grid_8 alpha">
+  <h4>MATCHES</h4>
+  <% match = Match.find_by_sql("SELECT * FROM MATCHES ORDER BY f-a DESC").first %>
+  <p><b>RECORD VICTORY (ALL COMPETITIONS)</b></p>
+  <p><%= match.f.to_s + "-" + match.a.to_s + " v " + match.opponent.name + " (" + match.han.downcase + ") " %>
+        <%= link_to match.matchdate.strftime("%d %b %Y"), match_path(match.id) %>
+        <%= constructcompetition(match.competition.abbrev, match.round,match.leg,match.replay) %></p><hr>
+  <% match = Match.find_by_sql("SELECT * FROM MATCHES WHERE competition_id=1 ORDER BY f-a DESC").first %>
+  <p><b>RECORD VICTORY (LEAGUE)</b></p>
+  <p><%= match.f.to_s + "-" + match.a.to_s + " v " + match.opponent.name + " (" + match.han.downcase + ") " %>
+        <%= link_to match.matchdate.strftime("%d %b %Y"), match_path(match.id) %></p><hr>
+  <% match = Match.find_by_sql("SELECT * FROM MATCHES WHERE competition_id=2 ORDER BY f-a DESC").first %>
+  <p><b>RECORD VICTORY (LEAGUE CUP)</b></p>
+  <p><%= match.f.to_s + "-" + match.a.to_s + " v " + match.opponent.name + " (" + match.han.downcase + ") " %>
+        <%= link_to match.matchdate.strftime("%d %b %Y"), match_path(match.id) %></p><hr>
+  <% match = Match.find_by_sql("SELECT * FROM MATCHES WHERE competition_id=3 ORDER BY f-a DESC").first %>
+  <p><b>RECORD VICTORY (FA CUP)</b></p>
+  <p><%= match.f.to_s + "-" + match.a.to_s + " v " + match.opponent.name + " (" + match.han.downcase + ") " %>
+        <%= link_to match.matchdate.strftime("%d %b %Y"), match_path(match.id) %></p><hr>
+  <% match = Match.find_by_sql("SELECT * FROM MATCHES INNER JOIN competitions ON matches.competition_id=competitions.id WHERE competitions.european=1 ORDER BY f-a DESC").first %>
+  <p><b>RECORD VICTORY (EUROPEAN)</b></p>
+  <p><%= match.f.to_s + "-" + match.a.to_s + " v " + match.opponent.name + " (" + match.han.downcase + ") " %>
+        <%= link_to match.matchdate.strftime("%d %b %Y"), match_path(match.id) %>
+        <%= constructcompetition(match.competition.abbrev,match.round,match.leg,match.replay) %></p><hr>
+  <% match = Match.find_by_sql("SELECT * FROM MATCHES WHERE han='H' ORDER BY f-a DESC").first %>
+  <p><b>RECORD HOME VICTORY</b></p>
+  <p><%= match.f.to_s + "-" + match.a.to_s + " v " + match.opponent.name %>
+        <%= link_to match.matchdate.strftime("%d %b %Y"), match_path(match.id) %>
+        <%= constructcompetition(match.competition.abbrev,match.round,match.leg,match.replay) %></p><hr>
+  <% match = Match.find_by_sql("SELECT * FROM MATCHES WHERE han='A' ORDER BY f-a DESC").first %>
+  <p><b>RECORD AWAY VICTORY</b></p>
+  <p><%= match.f.to_s + "-" + match.a.to_s + " v " + match.opponent.name %>
+        <%= link_to match.matchdate.strftime("%d %b %Y"), match_path(match.id) %>
+        <%= constructcompetition(match.competition.abbrev,match.round,match.leg,match.replay) %></p><hr>
+  <% match = Match.find_by_sql("SELECT * FROM MATCHES ORDER BY a-f DESC, a DESC").first %>
+  <p><b>RECORD DEFEAT (ALL COMPETITIONS)</b></p>
+  <p><%= match.f.to_s + "-" + match.a.to_s + " v " + match.opponent.name + " (" + match.han.downcase + ") " %>
+        <%= link_to match.matchdate.strftime("%d %b %Y"), match_path(match.id) %>
+        <%= constructcompetition(match.competition.abbrev, match.round,match.leg,match.replay) %></p><hr>
+  <% match = Match.find_by_sql("SELECT * FROM MATCHES WHERE competition_id=1 ORDER BY a-f DESC, a DESC").first %>
+  <p><b>RECORD DEFEAT (LEAGUE)</b></p>
+  <p><%= match.f.to_s + "-" + match.a.to_s + " v " + match.opponent.name + " (" + match.han.downcase + ") " %>
+        <%= link_to match.matchdate.strftime("%d %b %Y"), match_path(match.id) %></p><hr>
+  <% match = Match.find_by_sql("SELECT * FROM MATCHES WHERE competition_id=2 ORDER BY a-f DESC, a DESC").first %>
+  <p><b>RECORD DEFEAT (LEAGUE CUP)</b></p>
+  <p><%= match.f.to_s + "-" + match.a.to_s + " v " + match.opponent.name + " (" + match.han.downcase + ") " %>
+        <%= link_to match.matchdate.strftime("%d %b %Y"), match_path(match.id) %></p><hr>
+  <% match = Match.find_by_sql("SELECT * FROM MATCHES WHERE competition_id=3 ORDER BY a-f DESC, a DESC").first %>
+  <p><b>RECORD DEFEAT (FA CUP)</b></p>
+  <p><%= match.f.to_s + "-" + match.a.to_s + " v " + match.opponent.name + " (" + match.han.downcase + ") " %>
+        <%= link_to match.matchdate.strftime("%d %b %Y"), match_path(match.id) %></p><hr>
+  <% match = Match.find_by_sql("SELECT * FROM MATCHES INNER JOIN competitions ON matches.competition_id=competitions.id WHERE competitions.european=1 ORDER BY a-f DESC, a DESC").first %>
+  <p><b>RECORD DEFEAT (EUROPEAN)</b></p>
+  <p><%= match.f.to_s + "-" + match.a.to_s + " v " + match.opponent.name + " (" + match.han.downcase + ") " %>
+        <%= link_to match.matchdate.strftime("%d %b %Y"), match_path(match.id) %>
+        <%= constructcompetition(match.competition.abbrev,match.round,match.leg,match.replay) %></p><hr>
+  <% match = Match.find_by_sql("SELECT * FROM MATCHES WHERE han='H' ORDER BY a-f DESC, a DESC").first %>
+  <p><b>RECORD HOME DEFEAT</b></p>
+  <p><%= match.f.to_s + "-" + match.a.to_s + " v " + match.opponent.name %>
+        <%= link_to match.matchdate.strftime("%d %b %Y"), match_path(match.id) %>
+        <%= constructcompetition(match.competition.abbrev,match.round,match.leg,match.replay) %></p><hr>
+  <% match = Match.find_by_sql("SELECT * FROM MATCHES WHERE han='A' ORDER BY a-f DESC, a DESC").first %>
+  <p><b>RECORD AWAY DEFEAT</b></p>
+  <p><%= match.f.to_s + "-" + match.a.to_s + " v " + match.opponent.name %>
+        <%= link_to match.matchdate.strftime("%d %b %Y"), match_path(match.id) %>
+        <%= constructcompetition(match.competition.abbrev,match.round,match.leg,match.replay) %></p><hr>
+  <% match = Match.find_by_sql("SELECT * FROM MATCHES ORDER BY a+f DESC").first %>
+  <p><b>HIGHEST SCORING MATCH</b></p>
+  <p><%= (match.f+match.a).to_s + " (" + match.f.to_s + "-" + match.a.to_s + ") v " + match.opponent.name + " (" + match.han.downcase + ") "%>
+        <%= link_to match.matchdate.strftime("%d %b %Y"), match_path(match.id) %>
+        <%= constructcompetition(match.competition.abbrev,match.round,match.leg,match.replay) %></p><hr>
+
+</div>
+<div class="grid_8">
+  <h4>SEASONS</h4>
+  <%= render 'records/season',:sql=> "SELECT season_id, sum(pts) as stat FROM (SELECT season_id, count(*)*2 as pts
+    FROM matches WHERE f>a AND competition_id=1 AND season_id<>58 AND matchdate<'1981-06-01' GROUP BY season_id
+    UNION SELECT season_id, count(*) as pts FROM matches WHERE f=a AND competition_id=1 AND season_id<>58 AND
+    matchdate<'1981-06-01' GROUP BY season_id) as foo GROUP BY season_id ORDER BY stat DESC",:title=>"MOST POINTS (2pts for a win)" %>
+  <%= render 'records/season',:sql=> "SELECT season_id, sum(pts) as stat FROM (SELECT season_id, count(*)*3 as pts
+    FROM matches WHERE f>a AND competition_id=1 AND season_id<>58 AND matchdate>'1981-06-01' GROUP BY season_id
+    UNION SELECT season_id, count(*) as pts FROM matches WHERE f=a AND competition_id=1 AND season_id<>58 AND
+    matchdate>'1981-06-01' GROUP BY season_id) as foo GROUP BY season_id ORDER BY stat DESC",:title=>"MOST POINTS (3pts for a win)" %>
+  <%= render 'records/season',:sql=> "SELECT season_id, count(*) as stat FROM matches WHERE f>a AND competition_id=1
+    AND season_id<>58 GROUP BY season_id ORDER BY stat DESC",:title=>"MOST WINS" %>
+  <%= render 'records/season',:sql=> "SELECT season_id, count(*) as stat FROM matches WHERE f=a AND competition_id=1
+    AND season_id<>58 GROUP BY season_id ORDER BY stat DESC",:title=>"MOST DRAWS" %>
+  <%= render 'records/season',:sql=> "SELECT season_id, count(*) as stat FROM matches WHERE f<a AND competition_id=1
+    AND season_id<>58 GROUP BY season_id ORDER BY stat ASC",:title=>"FEWEST DEFEATS" %>
+  <%= render 'records/season',:sql=> "SELECT season_id, SUM(f) as stat FROM matches WHERE competition_id=1
+    AND season_id<>58 GROUP BY season_id ORDER BY stat DESC",:title=>"MOST GOALS SCORED" %>  
+  <%= render 'records/season',:sql=> "SELECT season_id, SUM(a) as stat FROM matches WHERE competition_id=1
+    AND season_id<>58 GROUP BY season_id ORDER BY stat ASC",:title=>"FEWEST GOALS CONCEDED" %>  
+  <%= render 'records/season',:sql=> "SELECT season_id, count(*) as stat FROM matches WHERE f>a AND competition_id=1
+    AND season_id<>58 GROUP BY season_id ORDER BY stat ASC",:title=>"FEWEST WINS" %>
+  <%= render 'records/season',:sql=> "SELECT season_id, count(*) as stat FROM matches WHERE f=a AND competition_id=1
+    AND season_id<>58 GROUP BY season_id ORDER BY stat ASC",:title=>"FEWEST DRAWS" %>
+  <%= render 'records/season',:sql=> "SELECT season_id, count(*) as stat FROM matches WHERE f<a AND competition_id=1
+    AND season_id<>58 GROUP BY season_id ORDER BY stat DESC",:title=>"MOST DEFEATS" %>
+  <%= render 'records/season',:sql=> "SELECT season_id, SUM(f) as stat FROM matches WHERE competition_id=1
+    AND season_id<>58 GROUP BY season_id ORDER BY stat ASC",:title=>"FEWEST GOALS SCORED" %>  
+  <%= render 'records/season',:sql=> "SELECT season_id, SUM(a) as stat FROM matches WHERE competition_id=1
+    AND season_id<>58 GROUP BY season_id ORDER BY stat DESC",:title=>"MOST GOALS CONCEDED" %>  
+  <%= render 'records/season',:sql=> "SELECT season_id, SUM(f-a) as stat FROM matches WHERE competition_id=1
+    AND season_id<>58 GROUP BY season_id ORDER BY stat DESC",:title=>"BEST GOAL DIFFERENCE" %>  
+  <%= render 'records/season',:sql=> "SELECT season_id, SUM(f-a) as stat FROM matches WHERE competition_id=1
+    AND season_id<>58 GROUP BY season_id ORDER BY stat ASC",:title=>"WORST GOAL DIFFERENCE" %>  
+  <%= render 'records/season',:sql=> "SELECT season_id, COUNT(*) as stat FROM matches GROUP BY season_id ORDER BY stat DESC",:title=>"MOST GAMES PLAYED (ALL COMPETITIONS)" %>  
+
+</div>
+</div>

@@ -1,2 +1,48 @@
-<h1>Oppplayer#show</h1>
-<p>Find me in app/views/oppplayer/show.html.erb</p>
+<div class="grid_24">
+  <h2><%= @oppplayer.knownname %></h2>
+</div>
+<div class="grid_10">
+  <h6 class="left"></br>FULL NAME</br><%= @oppplayer.firstnames + " " + @oppplayer.shortname %></br></br>
+  BORN</br><%= @oppplayer.birthplace %><%unless @oppplayer.birthdate.nil? %>, <%= @oppplayer.birthdate.strftime("%B %d, %Y") %><% end %></br>
+  
+  <% unless @oppplayer.deathdate.nil? %>
+  DIED</br><%= checkdeath(@oppplayer.deathdate) %></br>
+  <% end %>
+  </br>CAREER</br><%= @oppplayer.playingcareer %>
+</div>
+<div class="grid_14">
+  <h2>Appearances against NFFC</h2>
+  <div class="grid_1 alpha">
+       <h4>No</h4>
+  </div>
+  <div class="grid_2">
+       <h4>Date</h4>
+  </div>
+  <div class="grid_6">
+       <h4>Playing For</h4>
+  </div>
+  <div class="grid_1">
+       <h4>On</h4>
+  </div>
+  <div class="grid_1">
+       <h4>Off</h4>
+  </div>
+  <div class="grid_2">
+       <h4>Result</h4>
+  </div>
+  <div class="grid_1 omega">
+       <h4>Gls</h4>
+  </div>
+<% @matches.each_with_index do |x,idx| %>
+  <div class="grid_1 alpha"><%= h5cupcheck(idx,x.competition_id, false) %><%= idx+1 %></h5></div>     
+  <div class="grid_2"><%= h5cupcheck(idx,x.competition_id, false) %><%= link_to x.matchdate.strftime("%a %d %b"), match_path(x.id) %></h5></div>     
+  <div class="grid_6"><%= h5cupcheck(idx,x.competition_id, true) %><%= link_to homevenue(x.opponent.name,x.han), opponent_path(x.opponent.id) %><%= constructcompetition(x.competition.abbrev,x.round,x.leg,x.replay) %></h5></div>     
+  <div class="grid_1"><%= h5cupcheck(idx,x.competition_id, false) %><%= checkforzero(x.on.to_i) %></h5></div>     
+  <div class="grid_1"><%= h5cupcheck(idx,x.competition_id, false) %><%= x.off %></h5></div>     
+  <div class="grid_1"><%= h5cupcheck(idx,x.competition_id, false) %><%= wld(x.a,x.f) %></h5></div>     
+  <div class="grid_1"><%= h5cupcheck(idx,x.competition_id, false) %><%= x.a.to_s + "-" + x.f.to_s %></h5></div>     
+  <% gls = Oppgoal.find_all_by_match_id_and_oppplayer_id(x.match_id,@oppplayer.id).count %>
+  <div class="grid_1 omega"><%= h5cupcheck(idx,x.competition_id, false) %><%= gls %></h5></div>     
+<% end %>
+</div>
+<div class="grid_24"><hr></div>

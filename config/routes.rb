@@ -1,5 +1,7 @@
 Forestbase::Application.routes.draw do
 
+  get "records/show"
+
   match "/home"    => 'pages#home'
   
   match "/seasons" => 'seasons#index'
@@ -14,6 +16,8 @@ Forestbase::Application.routes.draw do
   match '/oppplayer/:id', :to => 'oppplayers#show' , :as => :oppplayer
 
   match '/leaders' => 'leaders#show'
+
+  match '/records' => 'records#show'
   
   match '/match/:id', :to => 'matches#show' , :as => :match
 

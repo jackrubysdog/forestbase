@@ -1,0 +1,4 @@
+  <% season = Season.find_by_sql(sql).first %>
+  <p><b><%= title %></b></p>
+  <% x=Season.find_by_id(season.season_id) %>
+  <p><%= season.stat + ", " + x.season + ", " + x.division.name + " (Tier " + x.division.tier.to_s + ")"  %></p><hr>
