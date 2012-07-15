@@ -112,6 +112,7 @@
         <%= constructcompetition(match.competition.abbrev,match.round,match.leg,match.replay) %></p><hr>
 
 </div>
+
 <div class="grid_8">
   <h4>SEASONS</h4>
   <%= render 'records/season',:sql=> "SELECT season_id, sum(pts) as stat FROM (SELECT season_id, count(*)*2 as pts
@@ -147,6 +148,26 @@
   <%= render 'records/season',:sql=> "SELECT season_id, SUM(f-a) as stat FROM matches WHERE competition_id=1
     AND season_id<>58 GROUP BY season_id ORDER BY stat ASC",:title=>"WORST GOAL DIFFERENCE" %>  
   <%= render 'records/season',:sql=> "SELECT season_id, COUNT(*) as stat FROM matches GROUP BY season_id ORDER BY stat DESC",:title=>"MOST GAMES PLAYED (ALL COMPETITIONS)" %>  
+</div>
+
+<div class="grid_8 omega">
+  <h4>SEQUENCES</h4>
+  <%= render 'records/sequence',:sql=> "SELECT * FROM matches WHERE f>a AND competition_id=1",:title=>"WINNING STREAK (LEAGUE ONLY)",:type=>"L"%>  
+  <%= render 'records/sequence',:sql=> "SELECT * FROM matches WHERE f=a AND competition_id=1",:title=>"DRAWING STREAK (LEAGUE ONLY)",:type=>"L" %>  
+  <%= render 'records/sequence',:sql=> "SELECT * FROM matches WHERE (f>a OR f=a) AND competition_id=1",:title=>"UNDEFEATED STREAK (LEAGUE ONLY)",:type=>"L" %>
+  <%= render 'records/sequence',:sql=> "SELECT * FROM matches WHERE f<>0 AND competition_id=1",:title=>"SCORING STREAK (LEAGUE ONLY)",:type=>"L" %>  
+  <%= render 'records/sequence',:sql=> "SELECT * FROM matches WHERE a=0 AND competition_id=1",:title=>"CLEAN SHEETS STREAK (LEAGUE ONLY)",:type=>"L" %>  
+  <%= render 'records/sequence',:sql=> "SELECT * FROM matches WHERE f<a AND competition_id=1",:title=>"LOSING STREAK (LEAGUE ONLY)",:type=>"L" %>  
+  <%= render 'records/sequence',:sql=> "SELECT * FROM matches WHERE (f<a OR f=a) AND competition_id=1",:title=>"WINLESS STREAK (LEAGUE ONLY)",:type=>"L" %>  
+  <%= render 'records/sequence',:sql=> "SELECT * FROM matches WHERE f=0 AND competition_id=1",:title=>"SCORELESS STREAK (LEAGUE ONLY)",:type=>"L" %>  
+  <%= render 'records/sequence',:sql=> "SELECT * FROM matches WHERE ((f>a and han='H') OR han='A') AND competition_id=1",:title=>"HOME WINNING STREAK (LEAGUE ONLY)",:type=>"H" %>  
+  <%= render 'records/sequence',:sql=> "SELECT * FROM matches WHERE (((f>a OR f=a) and han='H') OR han='A') AND competition_id=1",:title=>"HOME UNDEFEATED STREAK (LEAGUE ONLY)",:type=>"H" %>  
+  <%= render 'records/sequence',:sql=> "SELECT * FROM matches WHERE ((f>a and han='A') OR han='H') AND competition_id=1",:title=>"AWAY WINNING STREAK (LEAGUE ONLY)",:type=>"A" %>  
+  <%= render 'records/sequence',:sql=> "SELECT * FROM matches WHERE (((f>a OR f=a) and han='A') OR han='H') AND competition_id=1",:title=>"AWAY UNDEFEATED STREAK (LEAGUE ONLY)",:type=>"A" %>  
+  <%= render 'records/sequence',:sql=> "SELECT * FROM matches WHERE f>a",:title=>"WINNING STREAK (ALL GAMES)",:type=>"C"%>  
+  <%= render 'records/sequence',:sql=> "SELECT * FROM matches WHERE (f>a OR f=a)",:title=>"UNDEFEATED STREAK (ALL GAMES)",:type=>"C"%>  
+  <%= render 'records/sequence',:sql=> "SELECT * FROM matches WHERE f<a",:title=>"LOSING STREAK (ALL GAMES)",:type=>"C"%>  
 
 </div>
+
 </div>

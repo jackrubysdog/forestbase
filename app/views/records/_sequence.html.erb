@@ -1,0 +1,3 @@
+<p><b><%= title %></b></p>
+<% startdate, enddate, count = seqfinder(sql,type) %>
+<p><%= count %>, <%= startdate.strftime("%d %b %Y") %> to <%= enddate.strftime("%d %b %Y") %></p><hr>

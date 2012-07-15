@@ -6,9 +6,9 @@ class CreateMatches < ActiveRecord::Migration
       t.date    :matchdate
       t.integer :opponent_id
       t.integer :venue_id
-      t.string :han
+      t.string  :han
       t.integer :competition_id
-      t.string :round
+      t.string  :round
       t.integer :leg
       t.integer :replay
       t.integer :f
@@ -24,6 +24,7 @@ class CreateMatches < ActiveRecord::Migration
       t.integer :points
       t.integer :position
       t.integer :oppposition
+      t.integer :league_seq
       
     end
   end

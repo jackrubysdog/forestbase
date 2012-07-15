@@ -35,7 +35,7 @@
   </div>
 <% @matches.each_with_index do |x,idx| %>
   <div class="grid_1 alpha"><%= h5cupcheck(idx,x.competition_id, false) %><%= idx+1 %></h5></div>     
-  <div class="grid_2"><%= h5cupcheck(idx,x.competition_id, false) %><%= link_to x.matchdate.strftime("%a %d %b"), match_path(x.id) %></h5></div>     
+  <div class="grid_2"><%= h5cupcheck(idx,x.competition_id, false) %><%= link_to x.matchdate.strftime("%d %b %Y"), match_path(x.id) %></h5></div>     
   <div class="grid_6"><%= h5cupcheck(idx,x.competition_id, true) %><%= link_to homevenue(x.opponent.name,x.han), opponent_path(x.opponent.id) %><%= constructcompetition(x.competition.abbrev,x.round,x.leg,x.replay) %></h5></div>     
   <div class="grid_1"><%= h5cupcheck(idx,x.competition_id, false) %><%= checkforzero(x.on.to_i) %></h5></div>     
   <div class="grid_1"><%= h5cupcheck(idx,x.competition_id, false) %><%= x.off %></h5></div>     

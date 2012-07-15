@@ -25,6 +25,7 @@
 # points            : integer
 # position          : integer
 # oppposition       : integer
+# league_seq        : integer
 # created_at        : datetime
 # updated_at        : datetime
 
