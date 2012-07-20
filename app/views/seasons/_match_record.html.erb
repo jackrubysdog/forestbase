@@ -7,7 +7,7 @@
   </div>
 <% if parm == "season" %>
   <div class="grid_5">
-    <%= h5cupcheck(idx,matches.competition_id, true) %><%= link_to homevenue(matches.opponent.shortname,matches.han), opponent_path(matches.opponent.id) %><%= constructcompetition(matches.competition.abbrev,matches.round,matches.leg,matches.replay) %></h5>
+    <%= h5cupcheck(idx,matches.competition_id, true) %><%= link_to homevenue(opponentname(matches.opponent.id,matches.season.id),matches.han), opponent_path(matches.opponent.id) %><%= constructcompetition(matches.competition.abbrev,matches.round,matches.leg,matches.replay) %></h5>
   </div>
 <% else %>
   <div class="grid_2">

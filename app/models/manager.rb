@@ -8,6 +8,7 @@
 # startdate         : date
 # enddate           : date
 # managertype       : string
+# penpicture        : string
 
 class Manager < ActiveRecord::Base
 end

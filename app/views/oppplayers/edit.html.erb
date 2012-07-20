@@ -1,2 +1,72 @@
-<h1>Oppplayer#edit</h1>
-<p>Find me in app/views/oppplayer/edit.html.erb</p>
+<div class="grid_24">
+  <h2><%= @oppplayer.knownname %> - Edit </h2>
+  <%= form_for :oppplayer,:url => { :action => :update, :id => @oppplayer.id },:method => :put do |f| %>
+  <div class ="grid_8 alpha">
+    <h5>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+    </h5>
+  </div>
+  <div class ="grid_8">
+    <h5>
+    <%= f.label :birthplace %><br>
+    <%= f.text_field :birthplace %>
+    </h5>
+  </div>
+  <div class ="grid_8 omega">
+    <h5>
+    <%= f.label :birthdate, "Birthdate (yyyy-mm-dd)" %><br>
+    <%= f.text_field :birthdate %>
+    </h5>
+  </div>
+  <hr>
+  <div class ="grid_8 alpha">
+    <h5>
+    <%= f.label :firstnames, "First Names" %><br>
+    <%= f.text_field :firstnames %>
+    </h5>
+  </div>
+  <div class ="grid_8">
+    <h5>
+    <%= f.label :knownname, "Known Name" %><br>
+    <%= f.text_field :knownname %>
+    </h5>
+  </div>
+  <div class ="grid_8 omega">
+    <h5>
+    <%= f.label :deathdate, "Date of Death (yyyy-mm-dd)" %><br>
+    <%= f.text_field :deathdate %>
+    </h5>
+  </div>
+  <hr>
+  <div class ="grid_8 alpha">
+    <h5>
+    <%= f.label :shortname, "Surname" %><br>
+    <%= f.text_field :shortname %>
+    </h5>
+  </div>
+  <div class ="grid_8">
+    <h5>
+    <%= f.label :positionfull, "Playing Position" %><br>
+    <%= f.text_field :positionfull %>
+    </h5>
+  </div>
+  <div class ="grid_8 omega">
+    <h5>
+    <%= f.label :country, "Nationality (Country)" %><br>
+    <%= f.collection_select(:country_id, Country.all, :id, :name)%>
+    </h5>
+  </div>
+  <div class ="grid_24 alpha">
+    <h5>
+    <%= f.label :playingcareer, "Playing Career" %><br>
+    <%= f.text_area :playingcareer, :size => "114x4" %>
+    </h5>
+  </div>
+  <div class ="grid_24 alpha">
+    <h5>
+    <%= f.submit "Update" %>
+    </h5>
+  </div>
+<% end %>
+</div>

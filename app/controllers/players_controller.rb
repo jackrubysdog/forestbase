@@ -28,9 +28,21 @@ class PlayersController < ApplicationController
   end
 
   def edit
+    
+    @player = Player.find(params[:id])
+    @title = "Nottingham Forest - " + @player.knownname + " - Edit"    
+    
   end
 
   def update
+  
+    @player = Player.find(params[:id])
+ 
+    if @player.update_attributes(params[:player])
+      redirect_to :action => :show, :id => @player.id
+    else
+      render 'edit'
+    end
+  
   end
-
 end

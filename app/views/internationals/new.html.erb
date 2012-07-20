@@ -1,2 +1,83 @@
-<h1>International#new</h1>
-<p>Find me in app/views/international/new.html.erb</p>
+<div class="grid_24">
+  <h2>New International</h2>
+  <%= form_for @international,:html => {:multipart => true} do |f| %>
+  <div class ="grid_6 alpha">
+    <h5>
+    <%= f.label :player %><br>
+    <%= f.collection_select(:player_id, Player.order('name'), :id, :name)%>
+    </h5>
+  </div>
+  <div class ="grid_6">
+    <h5>
+    <%= f.label :country, "Opponents" %><br>
+    <%= f.collection_select(:country_id, Country.all, :id, :name)%>
+    </h5>
+  </div>
+  <div class ="grid_6">
+    <h5>
+    <%= f.label :matchdate, "Match Date (yyyy/mm/dd)" %><br>
+    <%= f.text_field :matchdate, :size => 25 %>
+    </h5>
+  </div>
+  <div class ="grid_6 omega">
+    <h5>
+    <%= f.label :venue, "Venue Name (Stadium, City)" %><br>
+    <%= f.text_field :venue, :size => 25 %>
+    </h5>
+  </div>
+  <div class ="grid_4 alpha">
+    <h5>
+    <%= f.label :competition %><br>
+    <%= f.text_field :competition, :size => 10 %>
+    </h5>
+  </div>
+  <div class ="grid_2">
+    <h5>
+    <%= f.label :han, "Venue H/A/N" %><br>
+    <%= f.text_field :han, :size => 6 %>
+    </h5>
+  </div>
+  <div class ="grid_1">
+    <h5>
+    <%= f.label :f, "F" %><br>
+    <%= f.text_field :f, :size => 1 %>
+    </h5>
+  </div>
+  <div class ="grid_1">
+    <h5>
+    <%= f.label :a, "A" %><br>
+    <%= f.text_field :a, :size => 1 %>
+    </h5>
+  </div>
+  <div class ="grid_2">
+    <h5>
+    <%= f.label :shirt, "Shirt" %><br>
+    <%= f.text_field :shirt, :size => 4 %>
+    </h5>
+  </div>
+  <div class ="grid_2">
+    <h5>
+    <%= f.label :on, "On" %><br>
+    <%= f.text_field :on, :size => 4 %>
+    </h5>
+  </div>
+  <div class ="grid_2">
+    <h5>
+    <%= f.label :off, "Off" %><br>
+    <%= f.text_field :off, :size => 4 %>
+    </h5>
+  </div>
+  <div class ="grid_2">
+    <h5>
+    <%= f.label :goals, "Goals Scored" %><br>
+    <%= f.text_field :goals, :size => 4 %>
+    </h5>
+  </div>
+  <div class ="grid_8 omega">
+    <h5>
+    <%= f.submit "Create" %>
+    </h5>
+  </div>
+
+<% end %>
+</div>

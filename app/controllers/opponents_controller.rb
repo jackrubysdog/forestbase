@@ -8,7 +8,7 @@ class OpponentsController < ApplicationController
   def index
     @title   = "Opponents"
     #104 are Forest!
-    @opponents = Opponent.where('id <> 104')
+    @opponents = Opponent.all(:conditions => ['id <> 104'], :order => 'name')
   end
 
   def new
@@ -17,7 +17,7 @@ class OpponentsController < ApplicationController
   def show
     @opponent = Opponent.find_by_id(params[:id])
     @title = "Nottingham Forest - " + @opponent.name
-    @matches = Match.find_all_by_opponent_id(params[:id])
+    @matches = Match.find_all_by_opponent_id(params[:id], :order => 'matchdate')
   end
 
   def update

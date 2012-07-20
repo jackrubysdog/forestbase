@@ -217,7 +217,7 @@ module ApplicationHelper
       leg == 2
         " (" + competition + round + ":2L)"
     elsif
-      replay.nil?
+      replay == 0 or replay.blank?
         " (" + competition + round + ")"
     elsif
       replay == 1
@@ -342,7 +342,6 @@ def homevenue(opponents,han)
     opponents.upcase
   else
     opponents
-
   end
 end
 

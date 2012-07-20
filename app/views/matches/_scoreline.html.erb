@@ -1,6 +1,6 @@
   <% if @match.han == "H" %>
     <% hometeam = "link_to 'Nottingham Forest', home_path" %>
-    <% awayteam = "link_to '" + @match.opponent.name + "', opponent_path(" + @match.opponent.id.to_s + ")" %>
+    <% awayteam = "link_to '" + opponentname(@match.opponent.id,@match.season.id) + "', opponent_path(" + @match.opponent.id.to_s + ")" %>
     <% home_for = @match.f %>
     <% away_for = @match.a %>
     <% @home_ht_for = @match.ht_f %>
@@ -9,7 +9,7 @@
     <% away_gss = constructoppgoalscorersstring(@match.id) %>
   <% else %>
     <% awayteam = "link_to 'Nottingham Forest', home_path"%>
-    <% hometeam =  "link_to '" + @match.opponent.name + "', opponent_path(" + @match.opponent.id.to_s + ")" %>
+    <% hometeam =  "link_to '" + opponentname(@match.opponent.id,@match.season.id) + "', opponent_path(" + @match.opponent.id.to_s + ")" %>
     <% away_for = @match.f %>
     <% home_for = @match.a %>
     <% @away_ht_for = @match.ht_f %>

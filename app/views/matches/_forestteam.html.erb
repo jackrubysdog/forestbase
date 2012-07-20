@@ -44,11 +44,11 @@
     <div class="grid_1 alpha"><%= h5alternate(idx) %><%= getsquadnumber(x.shirt,x.player.id,@match.season.id) %></h5></div>
     <div class="grid_5"><%= h5alternate_left(idx) %><%= link_to x.player.knownname, player_path(x.player.id) %>
     
-    <% if x.booked == true %>
+    <% if x.booked == 1 %>
       &nbsp;<%= image_tag("y.gif",{:style=>"vertical-align: -1px;"}) %> <%= x.bookedtime %>
     <% end %>
 
-  <% if x.sentoff == true %>
+  <% if x.sentoff == 1 %>
       &nbsp;<%= image_tag("r.gif",{:style=>"vertical-align: -1px;"}) %>
     <% end %>
     </h5></div>

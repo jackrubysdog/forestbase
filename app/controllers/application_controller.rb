@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  helper_method :opponentname
+  
   protect_from_forgery
   # before_filter :ensure_domain
   
@@ -22,5 +24,17 @@ class ApplicationController < ActionController::Base
   #    redirect_to("http://" + AP_ADDRESS) 
   #  end 
   # end 
+  
+ def opponentname(opponent,season)
+    opponent = Opponent.find_by_id(opponent)
+    if season >= opponent.previousnamestart and season <= opponent.previousnameend
+    return opponent.previousname
+    elsif season >= opponent.previousnamestart2 and season <= opponent.previousnameend2
+      return opponent.previousname2
+      else
+      return opponent.shortname
+    end
+  end
+
 
 end

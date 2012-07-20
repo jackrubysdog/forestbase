@@ -1,11 +1,18 @@
 class InternationalsController < ApplicationController
+
   def new
+    @title = "Nottingham Forest - New International"
+    @international = International.new
   end
-
-  def update
-  end
-
+  
   def create
+    @international = International.new(params[:international])
+    if @international.save
+      redirect_to @international.player_id
+    else
+      @title = "Nottingham Forest - New International"
+      render 'new'    
+    end
   end
 
   def show

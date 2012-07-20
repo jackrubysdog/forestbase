@@ -1,2 +1,237 @@
-<h1>Matches#edit</h1>
-<p>Find me in app/views/matches/edit.html.erb</p>
+<%= form_for @match do |f| %>
+  <div class="grid_24">
+  <h2><%= "Nottingham Forest - " + @match.matchdate.to_s + " v " + opponentname(@match.opponent.id,@match.season.id) + " (" + @match.han + ") - Edit" %></h2>
+  <div class ="grid_8 alpha">
+    <div class="grid_3 alpha">
+    <h5>
+    <%= f.label :season %><br>
+    <%= f.collection_select(:season_id, Season.all, :id, :season) %>
+    </h5>
+    </div>
+    <div class="grid_5 omega">
+    <h5>
+    <%= f.label :opponent %><br>
+    <%= f.collection_select(:opponent_id, Opponent.all, :id, :name) %>
+    </h5>
+    </div>
+    <div class="grid_3 alpha">
+    <h5>
+    <%= f.label :matchdate, "Date (yyyy-mm-dd)" %><br>
+    <%= f.text_field :matchdate, :size=>10 %>
+    </h5>
+    </div>
+    <div class="grid_5 omega">
+    <h5>
+    <%= f.label :competition %><br>
+    <%= f.collection_select(:competition_id, Competition.all, :id, :name) %>
+    </h5>
+    </div>
+  </div>
+  <div class="grid_8">
+    <div class="grid_6 alpha">
+    <h5>
+    <%= f.label :venue %><br>
+    <%= f.collection_select(:venue_id, Venue.all, :id, :name) %>
+    </h5>
+    </div>
+    <div class="grid_2 omega">
+    <h5>
+    <%= f.label :han, "H/A/N" %><br>
+    <%= f.text_field :han, :size=>5 %></h5>
+    </div>
+    <div class="grid_1 alpha">
+    <h5>
+    <%= f.label :round, "Rnd" %><br>
+    <%= f.text_field :round, :size=>1 %></h5>
+    </div>
+    <div class="grid_1">
+    <h5>
+    <%= f.label :leg, "Leg" %><br>
+    <%= f.text_field :leg, :size=>1 %></h5>
+    </div>
+    <div class="grid_2">
+    <h5>
+    <%= f.label :replay, "Replay" %><br>
+    <%= f.text_field :replay, :size=>1 %></h5>
+    </div>
+    <div class="grid_2">
+    <h5>
+    <%= f.label "Full Time" %><br>
+    <%= f.text_field :f, :size=>1 %>:<%= f.text_field :a, :size=>1 %></h5>
+    </div>
+    <div class="grid_2 omega">
+    <h5>
+    <%= f.label "Half Time" %><br>
+    <%= f.text_field :ht_f, :size=>1 %>:<%= f.text_field :ht_a, :size=>1 %></h5>
+    </div>
+  </div>
+    <div class ="grid_1 alpha">
+    <h5>
+    <%= f.label :extratime, "AET" %><br>
+    <%= f.check_box :extratime %>
+    </h5>
+    </div>
+    <div class ="grid_1">
+    <h5>
+    <%= f.label :penalties, "Pens" %><br>
+    <%= f.check_box :penalties %>
+    </h5>
+    </div>
+    <div class="grid_2">
+    <h5>
+    <%= f.label "Penalties" %><br>
+    <%= f.text_field :penalties_f, :size=>1 %>:<%= f.text_field :penalties_a, :size=>1 %></h5>
+    </div>
+    <div class="grid_1">
+    <h5>
+    <%= f.label :points, "Pts" %><br>
+    <%= f.text_field :points, :size=>1 %></h5>
+    </div>
+    <div class="grid_1">
+    <h5>
+    <%= f.label :position, "Pos" %><br>
+    <%= f.text_field :position, :size=>1 %></h5>
+    </div>
+    <div class="grid_2 omega">
+    <h5>    
+    <%= f.label :oppposition, "Opps Pos" %><br>
+    <%= f.text_field :oppposition, :size=>1 %></h5>
+    </div>
+    <div class ="grid_6 alpha">
+      <h5>
+      <%= f.label :referee %><br>
+      <%= f.collection_select(:referee_id, Referee.order('name'), :id, :name)%>
+      </h5>
+    </div>
+    <div class="grid_2 omega">
+    <h5>    
+    <%= f.label :attendance, "Attendance" %><br>
+    <%= f.text_field :attendance, :size=>5 %></h5>
+    </div>
+    <hr>
+  </div>
+<div class="grid_24">
+  <div class ="grid_12 alpha">
+    <h2>Forest Team</h2>
+    <div class = "grid_1 alpha"><h5>No</h5></div>
+    <div class = "grid_5"><h5>Player</h5></div>
+    <div class = "grid_2"><h5>Subbed</h5></div>
+    <div class = "grid_2"><h5>Booked</h5></div>
+    <div class = "grid_2 omega"><h5>Sent Off</h5></div>
+  <%= f.fields_for :appearances do |ff| %>
+    <div class = "grid_1 alpha"><h5><%= ff.text_field :shirt,:size=>1,:readonly => true %></h5></div>
+    <div class = "grid_5"><h5><%= ff.collection_select(:player_id,Player.order('name'),:id,:name,:include_blank => true) %></h5></div>
+    <div class = "grid_1"><h5><%= ff.text_field :off,:size=>1 %></h5></div>
+    <div class = "grid_1"><h5><%= ff.text_field :subbedby,:size=>1 %></h5></div>
+    <div class = "grid_1"><h5><%= ff.check_box :booked %></h5></div>
+    <div class = "grid_1"><h5><%= ff.text_field :bookedtime,:size=>1 %></h5></div>
+    <div class = "grid_1"><h5><%= ff.check_box :sentoff %></h5></div>
+    <div class = "grid_1 omega"><h5><%= ff.text_field :sentofftime,:size=>1 %></h5></div>
+  <% end %>
+  </div>
+  <div class ="grid_12 alpha">
+    <h2>Opposition Team</h2>
+    <div class = "grid_1 alpha"><h5>No</h5></div>
+    <div class = "grid_5"><h5>Player</h5></div>
+    <div class = "grid_2"><h5>Subbed</h5></div>
+    <div class = "grid_2"><h5>Booked</h5></div>
+    <div class = "grid_2 omega"><h5>Sent Off</h5></div>
+  <%= f.fields_for :oppappearances do |ff| %>
+    <div class = "grid_1 alpha"><h5><%= ff.text_field :shirt,:size=>1,:readonly => true %></h5></div>
+    <div class = "grid_5"><h5><%= ff.collection_select(:oppplayer_id,Oppplayer.order('name'),:id,:name,:include_blank => true) %></h5></div>
+    <div class = "grid_1"><h5><%= ff.text_field :off,:size=>1 %></h5></div>
+    <div class = "grid_1"><h5><%= ff.text_field :subbedby,:size=>1 %></h5></div>
+    <div class = "grid_1"><h5><%= ff.check_box :booked %></h5></div>
+    <div class = "grid_1"><h5><%= ff.text_field :bookedtime,:size=>1 %></h5></div>
+    <div class = "grid_1"><h5><%= ff.check_box :sentoff %></h5></div>
+    <div class = "grid_1 omega"><h5><%= ff.text_field :sentofftime,:size=>1 %></h5></div>
+  <% end %>
+  </div>
+  <hr>
+</div>
+<div class="grid_24">
+  <div class ="grid_12 alpha">
+    <h2>Forest Substitutes</h2>
+    <div class = "grid_1 alpha"><h5>No</h5></div>
+    <div class = "grid_5"><h5>Player</h5></div>
+    <div class = "grid_2"><h5>Subbed</h5></div>
+    <div class = "grid_2"><h5>Booked</h5></div>
+    <div class = "grid_2 omega"><h5>Sent Off</h5></div>
+  <%= f.fields_for :substitutes do |ff| %>
+    <div class = "grid_1 alpha"><h5><%= ff.text_field :shirt,:size=>1,:readonly => true %></h5></div>
+    <div class = "grid_5"><h5><%= ff.collection_select(:player_id,Player.order('name'),:id,:knownname,:include_blank => true) %></h5></div>
+    <div class = "grid_1"><h5><%= ff.text_field :off,:size=>1 %></h5></div>
+    <div class = "grid_1"><h5><%= ff.text_field :subbedby,:size=>1 %></h5></div>
+    <div class = "grid_1"><h5><%= ff.check_box :booked %></h5></div>
+    <div class = "grid_1"><h5><%= ff.text_field :bookedtime,:size=>1 %></h5></div>
+    <div class = "grid_1"><h5><%= ff.check_box :sentoff %></h5></div>
+    <div class = "grid_1 omega"><h5><%= ff.text_field :sentofftime,:size=>1 %></h5></div>
+  <% end %>
+  </div>
+  <div class ="grid_12 alpha">
+    <h2>Opposition Substitutes</h2>
+    <div class = "grid_1 alpha"><h5>No</h5></div>
+    <div class = "grid_5"><h5>Player</h5></div>
+    <div class = "grid_2"><h5>Subbed</h5></div>
+    <div class = "grid_2"><h5>Booked</h5></div>
+    <div class = "grid_2 omega"><h5>Sent Off</h5></div>
+  <%= f.fields_for :oppsubstitutes do |ff| %>
+    <div class = "grid_1 alpha"><h5><%= ff.text_field :shirt,:size=>1 %></h5></div>
+    <div class = "grid_5"><h5><%= ff.collection_select(:oppplayer_id,Oppplayer.order('name'),:id,:knownname,:include_blank => true) %></h5></div>
+    <div class = "grid_1"><h5><%= ff.text_field :off,:size=>1 %></h5></div>
+    <div class = "grid_1"><h5><%= ff.text_field :subbedby,:size=>1 %></h5></div>
+    <div class = "grid_1"><h5><%= ff.check_box :booked %></h5></div>
+    <div class = "grid_1"><h5><%= ff.text_field :bookedtime,:size=>1 %></h5></div>
+    <div class = "grid_1"><h5><%= ff.check_box :sentoff %></h5></div>
+    <div class = "grid_1 omega"><h5><%= ff.text_field :sentofftime,:size=>1 %></h5></div>
+  <% end %>
+  </div>
+</div>
+<div class="grid_24 omega">
+  <hr>
+  <div class ="grid_8 alpha">
+    <h2>Forest Goals</h2>
+    <div class = "grid_6 alpha"><h5>Player</h5></div>
+    <div class = "grid_1"><h5>Time</h5></div>
+    <div class = "grid_1 omega"><h5>Pen</h5></div>
+  <%= f.fields_for :goals do |ff| %>
+    <div class = "grid_6 alpha"><h5><%= ff.collection_select(:player_id,Player.order('name'),:id,:knownname,:include_blank => true) %></h5></div>
+    <div class = "grid_1"><h5><%= ff.text_field :time,:size=>1 %></h5></div>
+    <div class = "grid_1 omega"><h5><%= ff.check_box :penalty %></h5></div>
+  <% end %>
+  </div>
+  <div class ="grid_8">
+    <h2>Opposition Goals</h2>
+    <div class = "grid_6 alpha"><h5>Player</h5></div>
+    <div class = "grid_1"><h5>Time</h5></div>
+    <div class = "grid_1 omega"><h5>Pen</h5></div>
+  <%= f.fields_for :oppgoals do |ff| %>
+    <div class = "grid_6 alpha"><h5><%= ff.collection_select(:oppplayer_id,Oppplayer.order('name'),:id,:knownname,:include_blank => true) %></h5></div>
+    <div class = "grid_1"><h5><%= ff.text_field :time,:size=>1 %></h5></div>
+    <div class = "grid_1 omega"><h5><%= ff.check_box :penalty %></h5></div>
+  <% end %>
+  </div>
+    <div class ="grid_8 omega">
+    <h2>Forest Own Goals</h2>
+    <div class = "grid_7 alpha"><h5>Player</h5></div>
+    <div class = "grid_1 omega"><h5>Time</h5></div>
+  <%= f.fields_for :owngoals do |ff| %>
+    <div class = "grid_7 alpha"><h5><%= ff.collection_select(:player_id,Player.order('name'),:id,:knownname,:include_blank => true) %></h5></div>
+    <div class = "grid_1 omega"><h5><%= ff.text_field :time,:size=>1 %></h5></div>
+  <% end %>
+    <h2>Opposition Own Goals</h2>
+    <div class = "grid_7 alpha"><h5>Player</h5></div>
+    <div class = "grid_1 omega"><h5>Time</h5></div>
+  <%= f.fields_for :oppowngoals do |ff| %>
+    <div class = "grid_7 alpha"><h5><%= ff.collection_select(:oppplayer_id,Oppplayer.order('name'),:id,:knownname,:include_blank => true) %></h5></div>
+    <div class = "grid_1 omega"><h5><%= ff.text_field :time,:size=>1 %></h5></div>
+  <% end %>
+  </div>
+</div>
+  <hr>
+<div class ="grid_24">
+  <h5>
+    <%= f.submit "Update" %>
+  </h5>
+</div>
+<% end %>

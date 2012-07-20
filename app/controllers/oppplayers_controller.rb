@@ -12,8 +12,22 @@ class OppplayersController < ApplicationController
   end
 
   def edit
+    
+    @oppplayer = Oppplayer.find(params[:id])
+    @title = "Nottingham Forest - " + @oppplayer.knownname + " - Edit"    
+    
   end
 
   def update
+  
+    @oppplayer = Oppplayer.find(params[:id])
+ 
+    if @oppplayer.update_attributes(params[:oppplayer])
+      redirect_to :action => :show, :id => @oppplayer.id
+    else
+      render 'edit'
+    end
+  
   end
+  
 end

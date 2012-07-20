@@ -8,6 +8,7 @@
   <% unless @oppplayer.deathdate.nil? %>
   DIED</br><%= checkdeath(@oppplayer.deathdate) %></br>
   <% end %>
+  </br>POSITION</br><%= @oppplayer.positionfull %></br>
   </br>CAREER</br><%= @oppplayer.playingcareer %>
 </div>
 <div class="grid_14">
@@ -36,7 +37,7 @@
 <% @matches.each_with_index do |x,idx| %>
   <div class="grid_1 alpha"><%= h5cupcheck(idx,x.competition_id, false) %><%= idx+1 %></h5></div>     
   <div class="grid_2"><%= h5cupcheck(idx,x.competition_id, false) %><%= link_to x.matchdate.strftime("%d %b %Y"), match_path(x.id) %></h5></div>     
-  <div class="grid_6"><%= h5cupcheck(idx,x.competition_id, true) %><%= link_to homevenue(x.opponent.name,x.han), opponent_path(x.opponent.id) %><%= constructcompetition(x.competition.abbrev,x.round,x.leg,x.replay) %></h5></div>     
+  <div class="grid_6"><%= h5cupcheck(idx,x.competition_id, true) %><%= link_to homevenue(opponentname(x.opponent.id,x.season.id),x.han), opponent_path(x.opponent.id) %><%= constructcompetition(x.competition.abbrev,x.round,x.leg,x.replay) %></h5></div>     
   <div class="grid_1"><%= h5cupcheck(idx,x.competition_id, false) %><%= checkforzero(x.on.to_i) %></h5></div>     
   <div class="grid_1"><%= h5cupcheck(idx,x.competition_id, false) %><%= x.off %></h5></div>     
   <div class="grid_1"><%= h5cupcheck(idx,x.competition_id, false) %><%= wld(x.a,x.f) %></h5></div>     

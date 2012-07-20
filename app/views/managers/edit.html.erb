@@ -1,0 +1,46 @@
+<div class="grid_24">
+  <h2><%= @manager.informalname %> - Edit </h2>
+  <%= form_for :manager,:url => { :action => :update, :id => @manager.id },:method => :put do |f| %>
+  <div class ="grid_8 alpha">
+    <h5>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+    </h5>
+  </div>
+  <div class ="grid_8">
+    <h5>
+    <%= f.label :informalname, "Informal Name" %><br>
+    <%= f.text_field :informalname %>
+    </h5>
+  </div>
+  <div class ="grid_8 omega">
+    <h5>
+    <%= f.label :managertype, "Type S(ecretary), C(aretaker) or F(ull)" %><br>
+    <%= f.text_field :managertype %>
+    </h5>
+  </div>
+  <div class ="grid_12 alpha">
+    <h5>
+    <%= f.label :startdate, "Starting Date (yyyy-mm-dd)" %><br>
+    <%= f.text_field :startdate %>
+    </h5>
+  </div>
+  <div class ="grid_12 omega">
+    <h5>
+    <%= f.label :enddate, "Ending Date (yyyy-mm-dd)" %><br>
+    <%= f.text_field :enddate %>
+    </h5>
+  </div>
+  <div class ="grid_24 alpha">
+    <h5>
+    <%= f.label :penpicture, "Pen Picture" %><br>
+    <%= f.text_area :penpicture, :size => "114x12" %>
+    </h5>
+  </div>
+  <div class ="grid_24 alpha">
+    <h5>
+    <%= f.submit "Update" %>
+    </h5>
+  </div>
+<% end %>
+</div>

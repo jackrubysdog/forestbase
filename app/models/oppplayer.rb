@@ -14,7 +14,7 @@
 # shortname             : string(255)
 
 class Oppplayer < ActiveRecord::Base
-
+  
   belongs_to  :country
   has_many    :oppowngoals
   has_many    :oppgoals

@@ -7,6 +7,7 @@ class CreateManagers < ActiveRecord::Migration
       t.date :startdate
       t.date :enddate
       t.string :managertype
+      t.string :penpicture
 
     end
   end

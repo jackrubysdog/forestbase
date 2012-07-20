@@ -1,2 +1,198 @@
-<h1>Players#edit</h1>
-<p>Find me in app/views/players/edit.html.erb</p>
+<div class="grid_24">
+  <h2><%= @player.knownname %> - Edit </h2>
+  <%= form_for @player do |f| %>
+  <div class ="grid_8 alpha">
+    <h5>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+    </h5>
+  </div>
+  <div class ="grid_8">
+    <h5>
+    <%= f.label :birthplace %><br>
+    <%= f.text_field :birthplace %>
+    </h5>
+  </div>
+  <div class ="grid_8 omega">
+    <h5>
+    <%= f.label :birthdate, "Birthdate (yyyy-mm-dd)" %><br>
+    <%= f.text_field :birthdate %>
+    </h5>
+  </div>
+  <hr>
+  <div class ="grid_8 alpha">
+    <h5>
+    <%= f.label :firstnames, "First Names" %><br>
+    <%= f.text_field :firstnames %>
+    </h5>
+  </div>
+  <div class ="grid_8">
+    <h5>
+    <%= f.label :knownname, "Known Name" %><br>
+    <%= f.text_field :knownname %>
+    </h5>
+  </div>
+  <div class ="grid_8 omega">
+    <h5>
+    <%= f.label :deathdate, "Date of Death (yyyy-mm-dd)" %><br>
+    <%= f.text_field :deathdate %>
+    </h5>
+  </div>
+  <hr>
+  <div class ="grid_8 alpha">
+    <h5>
+    <%= f.label :shortname, "Surname" %><br>
+    <%= f.text_field :shortname %>
+    </h5>
+  </div>
+  <div class ="grid_8">
+    <h5>
+    <%= f.label :positionfull, "Playing Position" %><br>
+    <%= f.text_field :positionfull %>
+    </h5>
+  </div>
+  <div class ="grid_8 omega">
+    <h5>
+    <%= f.label :country, "Nationality (Country)" %><br>
+    <%= f.collection_select(:country_id, Country.all, :id, :name) %>
+    </h5>
+  </div>
+  <div class ="grid_24 alpha">
+    <h5>
+    <%= f.label :playingcareer, "Playing Career" %><br>
+    <%= f.text_area :playingcareer, :size => "114x4" %>
+    </h5>
+  </div>
+  <div class ="grid_8 alpha">
+    <h5>
+    <%= f.label :active, "Current Player" %><br>
+    <%= check_box 'player','active' %>
+    </h5>
+  </div>
+  <div class ="grid_8">
+    <h5>
+    <%= f.label :capsbefore, "Caps won before joined Forest" %><br>
+    <%= f.text_field :capsbefore %>
+    </h5>
+  </div>
+  <div class ="grid_8 omega">
+    <h5>
+    <%= f.label :capsafter, "Caps won after leaving Forest" %><br>
+    <%= f.text_field :capsafter %>
+    </h5>
+  </div>
+  <div class="grid_6 alpha">
+    <h5>
+    <%= f.label :position, "GOL/DEF/MID/ATT" %><br>
+    <%= f.text_field :position, :size => 20 %>
+    </h5>
+  </div>
+  <div class="grid_6">
+    <h5>
+    <%= f.label :number %><br>
+    <%= f.text_field :number, :size => 20 %>
+    </h5>
+  </div>
+  <div class ="grid_6">
+    <h5>
+    <%= f.label :loandatesigned, "Loan Date Signed (yyyy-mm-dd)" %><br>
+    <%= f.text_field :loandatesigned, :size => 20 %>
+    </h5>
+  </div>
+  <div class ="grid_6 omega">
+    <h5>
+    <%= f.label :loanedfrom, "Loaned From" %><br>
+    <%= f.text_field :loandatesigned, :size => 20 %>
+    </h5>
+  </div>
+  <div class="grid_6 alpha">
+    <h5>
+    <%= f.label :datesigned, "Date Signed (yyyy-mm-dd)" %><br>
+    <%= f.text_field :datesigned, :size => 20 %>
+    </h5>
+  </div>
+  <div class="grid_6">
+    <h5>
+    <%= f.label :signedfee, "Signed Fee" %><br>
+    <%= f.text_field :signedfee, :size => 20 %>
+    </h5>
+  </div>
+  <div class ="grid_6">
+    <h5>
+    <%= f.label :datesold, "Date Sold (yyyy-mm-dd)" %><br>
+    <%= f.text_field :datesold, :size => 20 %>
+    </h5>
+  </div>
+  <div class ="grid_6 omega">
+    <h5>
+    <%= f.label :soldfee, "Sold Fee" %><br>
+    <%= f.text_field :soldfee, :size => 20 %>
+    </h5>
+  </div>
+  <div class="grid_12 alpha">
+    <h5>
+    <%= f.label :signedfrom, "Signed From" %><br>
+    <%= f.text_field :signedfrom, :size => 50 %>
+    </h5>
+  </div>
+  <div class ="grid_12 omega">
+    <h5>
+    <%= f.label :soldto, "Sold To" %><br>
+    <%= f.text_field :soldto, :size => 50 %>
+    </h5>
+  </div>
+  <div class="grid_6 alpha">
+    <h5>
+    <%= f.label :datesignedsecondspell, "Date Signed (Second Spell) (yyyy-mm-dd)" %><br>
+    <%= f.text_field :datesignedsecondspell, :size => 20 %>
+    </h5>
+  </div>
+  <div class="grid_6">
+    <h5>
+    <%= f.label :signedfeesecondspell, "Signed Fee (Second Spell)" %><br>
+    <%= f.text_field :signedfeesecondspell, :size => 20 %>
+    </h5>
+  </div>
+  <div class ="grid_6">
+    <h5>
+    <%= f.label :datesoldsecondspell, "Date Sold (Second Spell) (yyyy-mm-dd)" %><br>
+    <%= f.text_field :datesoldsecondspell, :size => 20 %>
+    </h5>
+  </div>
+  <div class ="grid_6 omega">
+    <h5>
+    <%= f.label :soldfeesecondspell, "Sold Fee (Second Spell)" %><br>
+    <%= f.text_field :soldfeesecondspell, :size => 20 %>
+    </h5>
+  </div>
+  <div class="grid_12 alpha">
+    <h5>
+    <%= f.label :signedfromsecondspell, "Signed From (Second Spell)" %><br>
+    <%= f.text_field :signedfromsecondspell, :size => 50 %>
+    </h5>
+  </div>
+  <div class ="grid_12 omega">
+    <h5>
+    <%= f.label :soldtosecondspell, "Sold To (Second Spell)" %><br>
+    <%= f.text_field :soldtosecondspell, :size => 50 %>
+    </h5>
+  </div>
+  <div class ="grid_24 alpha">
+    <h5>
+    <%= f.label :managerialcareer, "Managerial Career" %><br>
+    <%= f.text_area :managerialcareer, :size => "114x3" %>
+    </h5>
+  </div>
+  <div class ="grid_24 alpha">
+    <h5>
+    <%= f.label :penpicture, "Pen Picture" %><br>
+    <%= f.text_area :penpicture, :size => "114x12" %>
+    </h5>
+  </div>
+  <div class ="grid_24 alpha">
+    <h5>
+    <%= f.submit "Update" %>
+    </h5>
+  </div>
+<% end %>
+</div>

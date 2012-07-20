@@ -7,25 +7,22 @@ Forestbase::Application.routes.draw do
   match "/seasons" => 'seasons#index'
   match '/seasons/:id', :to => 'seasons#show' , :as => :season
 
-  match "/players" => 'players#index'
-  match '/players/:id', :to => 'players#show' , :as => :player
+  resources :players
   
   match "/opponents" => 'opponents#index'
   match '/opponents/:id', :to => 'opponents#show' , :as => :opponent
   
-  match '/oppplayer/:id', :to => 'oppplayers#show' , :as => :oppplayer
-
+  resources :oppplayers
+  
   match '/leaders' => 'leaders#show'
 
   match '/records' => 'records#show'
   
-  match '/match/:id', :to => 'matches#show' , :as => :match
-
-  match "/managers" => 'managers#index'
-  match '/managers/:id', :to => 'managers#show' , :as => :manager
-
-  match "/internationals" => 'internationals#index'
-  match '/internationals/:id', :to => 'internationals#show' , :as => :international
+  resources :matches
   
+  resources :managers
+
+  resources :internationals
+ 
   root :to => 'pages#home'
 end

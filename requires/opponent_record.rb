@@ -5,7 +5,7 @@ def initialize(id)
 end
 
 def firstgame
-  firstgame = Match.find(:first,:conditions=>{:opponent_id=>@opponent_id})
+  firstgame = Match.find(:first,:conditions=>{:opponent_id=>@opponent_id},:order=>:matchdate)
   
   if firstgame.competition_id == 1
     competition = firstgame.division.abbrev
@@ -21,11 +21,11 @@ def firstgame
     result = "L"
   end
  
-  @firstgame = "<a href='/match/" + firstgame.id.to_s + "' >" + firstgame.matchdate.strftime("%d %b %Y") + "</a> " + competition + " " + firstgame.han + " " + result + " " + firstgame.f.to_s + "-" + firstgame.a.to_s
+  @firstgame = "<a href='/matches/" + firstgame.id.to_s + "' >" + firstgame.matchdate.strftime("%d %b %Y") + "</a> " + competition + " " + firstgame.han + " " + result + " " + firstgame.f.to_s + "-" + firstgame.a.to_s
 end
 
 def lastgame
-  lastgame = Match.find(:last,:conditions=>{:opponent_id=>@opponent_id})
+  lastgame = Match.find(:last,:conditions=>{:opponent_id=>@opponent_id},:order=>:matchdate)
   
   if lastgame.competition_id == 1
     competition = lastgame.division.abbrev
@@ -41,7 +41,7 @@ def lastgame
     result = "L"
   end
  
-  @lastgame = "<a href='/match/" + lastgame.id.to_s + "' >" + lastgame.matchdate.strftime("%d %b %Y") + "</a> " + competition + " " + lastgame.han + " " + result + " " + lastgame.f.to_s + "-" + lastgame.a.to_s
+  @lastgame = "<a href='/matches/" + lastgame.id.to_s + "' >" + lastgame.matchdate.strftime("%d %b %Y") + "</a> " + competition + " " + lastgame.han + " " + result + " " + lastgame.f.to_s + "-" + lastgame.a.to_s
 end
   
 def played

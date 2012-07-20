@@ -15,40 +15,54 @@
   <% else %>
   <%= image_tag("shirt.gif", :alt => "shirt") %></div>
   <% end %>
+  
   <div class="grid_6">
   <h6 class="left"></br>FULL NAME</br><%= @player.firstnames + " " + @player.shortname %></br></br>
   BORN</br><%= @player.birthplace %><%unless @player.birthdate.nil? %>, <%= @player.birthdate.strftime("%B %d, %Y") %><% end %></br>
+  
   <% unless @player.deathdate.nil? %>
     DIED</br><%= checkdeath(@player.deathdate) %></br>
   <% end %>
-    </br>CAREER</br><%= @player.playingcareer %>
-  <% unless @player.managerialcareer.nil? %>
-    </br>MANGERIAL CAREER</br><%= @player.managerialcareer %></br>
+  
+  </br>CAREER</br><%= @player.playingcareer %></br></br>
+  
+  <% unless @player.managerialcareer.blank? %>
+    MANGERIAL CAREER</br><%= @player.managerialcareer %></br></br>
   <% end %>
-  <% unless @player.signedfrom.nil? %>
-  </br>SIGNED FROM</br><%= @player.signedfrom %> (£<%= @player.signedfee.to_s.reverse.gsub(/...(?=.)/,'\&,').reverse %>),&nbsp;
-  <%= @player.datesigned.strftime("%b %Y") %></br>
+  
+  <% unless @player.signedfrom.blank? %>
+  SIGNED FROM</br><%= @player.signedfrom %> (£<%= @player.signedfee.to_s.reverse.gsub(/...(?=.)/,'\&,').reverse %>),&nbsp;
   <% end %>
-  <% unless @player.soldto.nil? %>
+  
+  <% unless @player.datesigned.blank? %><%= @player.datesigned.strftime("%b %Y") %></br><% end %>
+  
+  <% unless @player.soldto.blank? %>
   SOLD TO</br><%= @player.soldto %> (£<%= @player.soldfee.to_s.reverse.gsub(/...(?=.)/,'\&,').reverse %>),&nbsp;
-  <%= @player.datesold.strftime("%b %Y") %></br>
   <% end %>
-  <% unless @player.signedfromsecondspell.nil? %>
-  SIGNED FROM (2nd spell)</br><%= @player.signedfromsecondspell %> (£<%= @player.signedfeesecondspell.to_s.reverse.gsub(/...(?=.)/,'\&,').reverse %>),&nbsp;
-  <%= @player.datesignedsecondspell.strftime("%b %Y") %></br>
+  
+  <% unless @player.datesold.blank? %><%= @player.datesold.strftime("%b %Y") %><% end %>
+  
+  <% unless @player.signedfromsecondspell.blank? %>
+  </br>SIGNED FROM (2nd spell)</br><%= @player.signedfromsecondspell %> (£<%= @player.signedfeesecondspell.to_s.reverse.gsub(/...(?=.)/,'\&,').reverse %>),&nbsp;
   <% end %>
-  <% unless @player.soldtosecondspell.nil? %>
+  
+  <% unless @player.datesignedsecondspell.blank? %><%= @player.datesignedsecondspell.strftime("%b %Y") %><% end %></br>
+
+  <% unless @player.soldtosecondspell.blank? %>
   SOLD TO (2nd spell)</br><%= @player.soldtosecondspell %> (£<%= @player.soldfeesecondspell.to_s.reverse.gsub(/...(?=.)/,'\&,').reverse %>),&nbsp;
-  <%= @player.datesoldsecondspell.strftime("%b %Y") %></br>
   <% end %>
-  <% unless @player.loanedfrom.nil? %>
+  
+  <% unless @player.datesoldsecondspell.blank? %><%= @player.datesoldsecondspell.strftime("%b %Y") %></br><% end %> 
+  
+  <% unless @player.loanedfrom.blank? %>
   LOANED FROM</br><%= @player.loanedfrom %>,&nbsp;
   <%= @player.loandatesigned.strftime("%b %Y") %></br>
   <% end %>
+  
   <% player = PlayerRecord.new(@player.id) %>
-  <h6 class="left"></br>
-  FOREST DEBUT</br><%= player.firstgame.strftime("%b %d, %Y") %> v <%= constructopponentfromdate(player.firstgame) %>&nbsp;<%= getvenuefromdate(player.firstgame) %></br>
-  <% unless @player.active == true %>
+  <h6 class="left">
+    </br>FOREST DEBUT</br><%= player.firstgame.strftime("%b %d, %Y") %> v <%= constructopponentfromdate(player.firstgame) %>&nbsp;<%= getvenuefromdate(player.firstgame) %></br>
+  <% unless @player.active == 1 %>
   FINAL GAME</br><%= player.lastgame.strftime("%b %d, %Y") %> v <%= constructopponentfromdate(player.lastgame) %>&nbsp;<%= getvenuefromdate(player.lastgame) %></br>
   <% end %>
   </div>

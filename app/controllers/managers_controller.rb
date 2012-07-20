@@ -9,10 +9,24 @@ class ManagersController < ApplicationController
     @manager = Manager.find_by_id(params[:id])
     @title = "Nottingham Forest - " + @manager.informalname 
   end
-
-  def new
+  
+  def edit
+    
+    @manager = Manager.find(params[:id])
+    @title = "Nottingham Forest - " + @manager.informalname + " - Edit"    
+    
   end
+
 
   def update
+    
+    @manager = Manager.find(params[:id])
+ 
+    if @manager.update_attributes(params[:manager])
+      redirect_to :action => :show, :id => @manager.id
+    else
+      render 'edit'
+    end
   end
+
 end
